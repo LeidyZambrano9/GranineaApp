@@ -12,7 +12,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GranineaApp">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.auth.RegistroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.inicio.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.inicio.SplashActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.productos.DetalleProductoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.perfil.EditarPerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.admin.AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.admin.productos.EditarProductoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.admin.productos.CrearProductoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

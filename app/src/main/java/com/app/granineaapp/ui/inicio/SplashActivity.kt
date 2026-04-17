@@ -6,18 +6,19 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.app.granineaapp.R
-import com.app.granineaapp.ui.auth.LoginActivity
+// Importamos HomeActivity para que el Intent la encuentre
+import com.app.granineaapp.ui.inicio.HomeActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Ponemos el layout
         setContentView(R.layout.activity_splash)
 
-        // Esperar 3 segundos y pasar al Login
+        // Cambiamos el destino: ahora va hacia HomeActivity
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, LoginActivity::class.java))
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
             finish()
         }, 3000)
     }

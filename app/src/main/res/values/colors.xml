@@ -3,4 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="color_fondo">#000000</color>
+    <color name="colorverde_letra">#3AFF64</color>
+    <color name="colornegro_letra">#000000</color>
 </resources>

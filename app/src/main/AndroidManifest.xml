@@ -8,9 +8,19 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.GranineaApp">
+
+        <activity
+            android:name=".ui.inicio.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".ui.auth.RegistroActivity"
             android:exported="false" />
@@ -20,9 +30,7 @@
         <activity
             android:name=".ui.inicio.HomeActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.inicio.SplashActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.main.productos.DetalleProductoActivity"
             android:exported="false" />
@@ -38,15 +46,11 @@
         <activity
             android:name=".ui.main.admin.productos.CrearProductoActivity"
             android:exported="false" />
+
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

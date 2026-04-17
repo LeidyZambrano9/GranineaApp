@@ -1,3 +1,5 @@
 package com.app.granineaapp.model
 
-data class DetallePedido()
+data class DetallePedido(
+    val id: Int = 0
+)

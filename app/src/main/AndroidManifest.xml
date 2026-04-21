@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GranineaApp">
         <activity
+            android:name=".ui.main.admin.usuarios.EditarUsuarioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.admin.pedidos.DetallePedidoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.auth.RegistroActivity"
             android:exported="false" />
         <activity
@@ -30,7 +36,7 @@
             android:name=".ui.main.perfil.EditarPerfilActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.admin.AdminActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.admin.productos.EditarProductoActivity"
@@ -39,7 +45,7 @@
             android:name=".ui.main.admin.productos.CrearProductoActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name=".ui.main.admin.AdminActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

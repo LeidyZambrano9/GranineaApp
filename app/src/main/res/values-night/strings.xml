@@ -1,9 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GranineaApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="nav_open">Abrir menú de navegación</string>
-    <string name="nav_close">Cerrar menú de navegación</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mostrar_todos_los_pedidos">Mostrar todos los pedidos</string>
     <string name="usuarios">Usuarios</string>
     <string name="_0">0</string>
     <string name="pedidos_hoy">Pedidos hoy</string>

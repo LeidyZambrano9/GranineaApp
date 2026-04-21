@@ -1,7 +1,7 @@
 package com.app.granineaapp.model
 
 data class Usuario(
-    val id: Int,
+    val id: Int = 0,
     val nombreApellido: String,
     val correo: String,
     val celular: String,
@@ -14,3 +14,4 @@ enum class Rol {
     TRABAJADOR,
     ADMIN
 }
+

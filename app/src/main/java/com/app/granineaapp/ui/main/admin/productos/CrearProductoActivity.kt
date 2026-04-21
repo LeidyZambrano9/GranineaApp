@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.granineaapp.R
 import com.app.granineaapp.data.FakeData
-import com.app.granineaapp.model.Producto
+import com.app.granineaapp.ui.main.productos.Producto
 
 class CrearProductoActivity : AppCompatActivity() {
 
@@ -27,10 +27,10 @@ class CrearProductoActivity : AppCompatActivity() {
         etTamanio = findViewById(R.id.etCrearTamanio)
         etSabores = findViewById(R.id.etCrearSabores)
 
-        findViewById<View>(R.id.btnGuardarProducto).setOnClickListener { guardarProducto() }
+        //findViewById<View>(R.id.btnGuardarProducto).setOnClickListener { guardarProducto() }
     }
 
-    private fun guardarProducto() {
+    /**private fun guardarProducto() {
         val nombre = etNombre.text.toString().trim()
         val descripcion = etDescripcion.text.toString().trim()
         val precioStr = etPrecio.text.toString().trim()
@@ -63,5 +63,5 @@ class CrearProductoActivity : AppCompatActivity() {
         FakeData.productos.add(nuevoProducto)
         Toast.makeText(this, "El producto se cargó correctamente", Toast.LENGTH_SHORT).show()
         finish()
-    }
+    }**/
 }

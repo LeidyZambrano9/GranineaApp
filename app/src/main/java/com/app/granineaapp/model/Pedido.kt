@@ -1,11 +1,12 @@
 package com.app.granineaapp.model
 
+
 import com.app.granineaapp.model.Usuario
 import com.app.granineaapp.model.DetallePedido
 import java.util.Date
 
 data class Pedido(
-    val id: Int,
+    val id: Int = 0,
     val cliente: Usuario,
     val detalles: List<DetallePedido>,
     val direccionEntrega: String,

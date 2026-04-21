@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fondo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- IMAGEN + BOTÓN CERRAR -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <ImageView
+                android:id="@+id/img_detalle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="Imagen del producto" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_shadow" />
+
+            <ImageButton
+                android:id="@+id/btn_cerrar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/bg_circle_black"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                android:contentDescription="Cerrar detalle"
+                android:tint="@color/white" />
+        </FrameLayout>
+
+        <!-- CARD INFORMACIÓN -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card_dark"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginTop="-30dp"
+            android:elevation="8dp">
+
+            <TextView
+                android:id="@+id/tv_nombre_detalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorverde_letra"
+                android:gravity="start"
+                android:text="Nombre del Producto" />
+
+            <!-- PRECIO -->
+            <TextView
+                android:id="@+id/tv_precio_detalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:gravity="start"
+                android:textSize="22sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="4dp"
+                android:text="$ 0.00" />
+
+            <!-- CONTENIDO DEL PRODUCTO -->
+            <TextView
+                android:id="@+id/tv_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textSize="16sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="12dp"
+                android:lineSpacingExtra="4dp"
+                android:text="Descripción aquí" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider_color"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
+
+            <!-- SABORES -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Elige tu sabor"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+
+            <RadioGroup
+                android:id="@+id/radio_sabores"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <RadioButton
+                    android:id="@+id/rb_uva"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Uva"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/colorverde_letra" />
+                <RadioButton
+                    android:id="@+id/rb_maracumango"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Maracumango"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/colorverde_letra" />
+                <RadioButton
+                    android:id="@+id/rb_mango_biche"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mango Biche"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/colorverde_letra" />
+
+            </RadioGroup>
+
+            <!-- CONTADOR + BOTÓN -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="24dp">
+
+                <!-- SELECTOR DE CANTIDAD -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_quantity_selector"
+                    android:padding="4dp">
+
+                    <ImageButton
+                        android:id="@+id/btn_menos"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@android:drawable/ic_media_previous"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Menos"
+                        android:tint="@color/colorverde_letra"/>
+
+                    <TextView
+                        android:id="@+id/tv_cantidad"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:gravity="center" />
+
+                    <ImageButton
+                        android:id="@+id/btn_mas"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:src="@android:drawable/ic_media_next"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="Más"
+                        android:tint="@color/colorverde_letra"/>
+                </LinearLayout>
+
+                <!-- BOTÓN AGREGAR -->
+                <Button
+                    android:id="@+id/btn_agregar"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:text="AGREGAR AL CARRITO"
+                    android:textStyle="bold"
+                    android:layout_marginStart="16dp"
+                    android:backgroundTint="@color/colorverde_letra"
+                    android:textColor="@color/black"
+                    app:cornerRadius="16dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

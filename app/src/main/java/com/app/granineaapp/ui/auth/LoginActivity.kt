@@ -1,21 +1,35 @@
 package com.app.granineaapp.ui.auth
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.app.granineaapp.R
+import com.app.granineaapp.ui.inicio.HomeActivity
+import com.app.granineaapp.ui.main.MainActivity
 
 class LoginActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_login)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        // 1. Enlazamos los componentes del XML con el código
+        val btnIniciarSesion = findViewById<Button>(R.id.botonIniciarSesionLogin)
+        val txtCrearCuenta = findViewById<TextView>(R.id.txtCrearCuenta)
+
+        // 2. Acción para el botón de Inicio (BLOQUEADO POR AHORA)
+        btnIniciarSesion?.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 3. Acción para "Crear Cuenta" (Ir al Registro)
+        txtCrearCuenta?.setOnClickListener {
+            val intent = Intent(this, RegistroActivity::class.java)
+            startActivity(intent)
         }
     }
 }

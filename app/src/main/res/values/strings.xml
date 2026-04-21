@@ -31,4 +31,15 @@
     <string name="agregar_producto2">Agregar producto</string>
     <string name="nombre">Nombre *</string>
     <string name="ej_granizado_de_fresa">Ej: Granizado de fresa</string>
+    <string name="nuestros_productos">Nuestros productos</string>
+    <string name="navigation_drawer_open">Menu Abierto</string>
+    <string name="navigation_drawer_close">Menu Cerrado</string>
+    <string name="graninea">GRANINEA</string>
+    <string name="home">Home</string>
+    <string name="catalogom">Catalogo</string>
+    <string name="carrito_de_compras">Carrito de compras</string>
+    <string name="mi_perfil">Mi Perfil</string>
+    <string name="nuestros_productosCTL">Nuestros productos</string>
+    <string name="homeText">¡Bienvenido a Graninea El lugar donde los sabores se vuelven hielo y la fres¡Nuevo!Pulsar para editarcura nunca se acaba. Explora nuestros granizados, descubre nuevos sabores y disfruta cada sorbo. Estamos en Calle 130 C # 10A - 82 ¡Haz tu pedido y refréscate ahora!</string>
+    <string name="imagen_del_producto">Imagen del producto</string>
 </resources>

@@ -3,72 +3,46 @@ package com.app.granineaapp.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.granineaapp.R
-import com.app.granineaapp.model.DetallePedido
+import com.app.granineaapp.ui.main.carrito.CarritoItem
 
 class CarritoAdapter(
-    private val detalles: MutableList<DetallePedido>,
-    private val onCantidadCambiada: (DetallePedido, Int) -> Unit  // nuevo total
-) : RecyclerView.Adapter<CarritoAdapter.ViewHolder>() {
+    private val items: MutableList<CarritoItem>,
+    private val onRemoveClick: (CarritoItem) -> Unit,
+    private val onUpdateTotal: () -> Unit
+) : RecyclerView.Adapter<CarritoAdapter.CarritoViewHolder>() {
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tvReferencia: TextView = view.findViewById(R.id.tvCarritoReferencia)
-        val tvSabor: TextView = view.findViewById(R.id.tvCarritoSabor)
-        val tvPrecioUnitario: TextView = view.findViewById(R.id.tvCarritoPrecioUnitario)
-        val tvPrecioTotal: TextView = view.findViewById(R.id.tvCarritoPrecioTotal)
-        val tvCantidad: TextView = view.findViewById(R.id.tvCarritoCantidad)
-        val btnMenos: View = view.findViewById(R.id.btnCarritoMenos)
-        val btnMas: View = view.findViewById(R.id.btnCarritoMas)
+    class CarritoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val imgProducto: ImageView = view.findViewById(R.id.img_item_carrito)
+        val tvNombre: TextView = view.findViewById(R.id.tv_nombre_item_carrito)
+        val tvSabor: TextView = view.findViewById(R.id.tv_sabor_item_carrito)
+        val tvPrecio: TextView = view.findViewById(R.id.tv_precio_item_carrito)
+        val tvCantidad: TextView = view.findViewById(R.id.tv_cantidad_item_carrito)
+        val btnEliminar: ImageButton = view.findViewById(R.id.btn_eliminar_item)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarritoViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_carrito, parent, false)
-        return ViewHolder(view)
+        return CarritoViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val detalle = detalles[position]
-        holder.tvReferencia.text = "referencia= ${detalle.producto.nombre}"
-        holder.tvSabor.text = "sabor= ${detalle.sabor}"
-        holder.tvPrecioUnitario.text = "valor Unitario=$${String.format("%,.0f", detalle.precioUnitario)}"
-        holder.tvPrecioTotal.text = "valor Total =$${String.format("%,.0f", detalle.precioTotal)}"
-        holder.tvCantidad.text = detalle.cantidad.toString()
+    override fun onBindViewHolder(holder: CarritoViewHolder, position: Int) {
+        val item = items[position]
+        holder.tvNombre.text = item.nombre
+        holder.tvSabor.text = "Sabor: ${item.sabor}"
+        holder.tvPrecio.text = "$${(item.precio * item.cantidad).toInt()}"
+        holder.tvCantidad.text = "Cant: ${item.cantidad}"
+        holder.imgProducto.setImageResource(item.imagenRes)
 
-        holder.btnMenos.setOnClickListener {
-            if (detalle.cantidad > 1) {
-                val nuevo = detalle.copy(cantidad = detalle.cantidad - 1)
-                detalles[position] = nuevo
-                notifyItemChanged(position)
-                onCantidadCambiada(nuevo, nuevo.cantidad)
-            }
-        }
-        holder.btnMas.setOnClickListener {
-            val nuevo = detalle.copy(cantidad = detalle.cantidad + 1)
-            detalles[position] = nuevo
-            notifyItemChanged(position)
-            onCantidadCambiada(nuevo, nuevo.cantidad)
+        holder.btnEliminar.setOnClickListener {
+            onRemoveClick(item)
         }
     }
 
-    override fun getItemCount() = detalles.size
-
-    fun getDetalles(): List<DetallePedido> = detalles.toList()
-
-    fun agregarDetalle(detalle: DetallePedido) {
-        val existente = detalles.indexOfFirst {
-            it.producto.id == detalle.producto.id && it.sabor == detalle.sabor
-        }
-        if (existente != -1) {
-            detalles[existente] = detalles[existente].copy(
-                cantidad = detalles[existente].cantidad + detalle.cantidad
-            )
-            notifyItemChanged(existente)
-        } else {
-            detalles.add(detalle)
-            notifyItemInserted(detalles.size - 1)
-        }
-    }
+    override fun getItemCount(): Int = items.size
 }

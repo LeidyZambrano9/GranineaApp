@@ -29,19 +29,19 @@ class EditarProductoActivity : AppCompatActivity() {
         etTamanio = findViewById(R.id.etEditarTamanio)
         etSabores = findViewById(R.id.etEditarSabores)
 
-        cargarDatos()
+        //cargarDatos()
 
         findViewById<View>(R.id.btnGuardarEdicion).setOnClickListener { guardarCambios() }
     }
 
-    private fun cargarDatos() {
+    /**private fun cargarDatos() {
         val producto = FakeData.productos.find { it.id == productoId } ?: return
         etNombre.setText(producto.nombre)
         etDescripcion.setText(producto.descripcion)
         etPrecio.setText(producto.precio.toInt().toString())
         etTamanio.setText(producto.tamanio)
         etSabores.setText(producto.saboresDisponibles.joinToString(", "))
-    }
+    }**/
 
     private fun guardarCambios() {
         val nombre = etNombre.text.toString().trim()
@@ -61,7 +61,7 @@ class EditarProductoActivity : AppCompatActivity() {
             return
         }
 
-        val index = FakeData.productos.indexOfFirst { it.id == productoId }
+        /**val index = FakeData.productos.indexOfFirst { it.id == productoId }
         if (index != -1) {
             FakeData.productos[index] = FakeData.productos[index].copy(
                 nombre = nombre,
@@ -72,6 +72,6 @@ class EditarProductoActivity : AppCompatActivity() {
             )
             Toast.makeText(this, "El producto se cargó correctamente", Toast.LENGTH_SHORT).show()
             finish()
-        }
+        }**/
     }
 }

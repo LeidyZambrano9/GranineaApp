@@ -1,14 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.pedidos.HistorialFragment">
+    android:background="#000000"
+    android:padding="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- TARJETA HISTORIAL -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:background="#D9D9D9"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="24dp">
+
+        <!-- BOTON CERRAR X -->
+        <TextView
+            android:id="@+id/tv_cerrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="✕"
+            android:textColor="#39FF14"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="4dp"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- TITULO -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HISTORIAL"
+            android:textColor="#1A1A6E"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- ITEM 1 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="30 De Enero 2026"
+            android:textColor="#1A1A6E"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#BBBBBB"/>
+
+        <!-- ITEM 2 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="22 De Enero 2026"
+            android:textColor="#1A1A6E"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#BBBBBB"/>
+
+        <!-- ITEM 3 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="13 De Enero 2026"
+            android:textColor="#1A1A6E"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#BBBBBB"/>
+
+        <!-- ITEM 4 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="03 De Enero 2026"
+            android:textColor="#1A1A6E"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#BBBBBB"/>
+
+        <!-- ITEM 5 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="24 De Diciembre 2025"
+            android:textColor="#1A1A6E"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"/>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#BBBBBB"/>
+
+        <!-- ITEM 6 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="07 De Diciembre 2025"
+            android:textColor="#1A1A6E"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"/>
+
+    </LinearLayout>
+
+    <!-- BOTON MOSTRAR MAS -->
+    <Button
+        android:id="@+id/btn_mostrar_mas"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:text="Mostrar Más"
+        android:textStyle="bold|italic"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:backgroundTint="#39FF14"
+        android:stateListAnimator="@null"/>
 
 </FrameLayout>

@@ -15,7 +15,7 @@
         android:text="@string/editar_producto"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/text_primary"
+        android:textColor="@color/white"
         android:gravity="center"
         android:paddingBottom="24dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="Nombre *"
         android:textSize="14sp"
-        android:textColor="@color/text_secondary"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/tvTituloEditar"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -38,7 +38,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:backgroundTint="@color/primary"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintTop_toBottomOf="@id/labelNombreEditar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -50,7 +52,7 @@
         android:layout_height="wrap_content"
         android:text="Descripción"
         android:textSize="14sp"
-        android:textColor="@color/text_secondary"
+        android:textColor="@color/white"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/etEditarNombre"
         app:layout_constraintStart_toStartOf="parent" />
@@ -61,7 +63,9 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:minLines="2"
-        android:backgroundTint="@color/primary"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintTop_toBottomOf="@id/labelDescripcionEditar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -89,14 +93,16 @@
                 android:layout_height="wrap_content"
                 android:text="Precio *"
                 android:textSize="14sp"
-                android:textColor="@color/text_secondary" />
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/etEditarPrecio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:backgroundTint="@color/primary" />
+                android:backgroundTint="@color/white"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -110,14 +116,16 @@
                 android:layout_height="wrap_content"
                 android:text="Tamaño *"
                 android:textSize="14sp"
-                android:textColor="@color/text_secondary" />
+                android:textColor="@color/white" />
 
             <EditText
                 android:id="@+id/etEditarTamanio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:backgroundTint="@color/primary" />
+                android:backgroundTint="@color/white"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -128,7 +136,7 @@
         android:layout_height="wrap_content"
         android:text="Sabores disponibles (separados por coma)"
         android:textSize="14sp"
-        android:textColor="@color/text_secondary"
+        android:textColor="@color/white"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/rowPrecioTamanioEditar"
         app:layout_constraintStart_toStartOf="parent" />
@@ -138,7 +146,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:backgroundTint="@color/primary"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintTop_toBottomOf="@id/labelSaboresEditar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

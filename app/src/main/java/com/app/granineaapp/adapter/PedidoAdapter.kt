@@ -30,12 +30,22 @@ class PedidoAdapter(
         return ViewHolder(view)
     }
 
+    // Verifica que tu adapter tenga esto en onBindViewHolder:
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val pedido = pedidos[position]
+
         holder.tvTitulo.text = "Pedido #${pedido.id}"
-        holder.tvDetalle.text = "Detalle del pedido"
+        holder.tvDetalle.text = "${pedido.cliente} • $${pedido.total}"
+
+        // ✅ Click para ver detalle
         holder.btnDetalle.setOnClickListener { onVerDetalle(pedido) }
-        holder.btnMarcar?.setOnClickListener { onMarcarEntregado?.invoke(pedido) }
+
+        // ✅ Botón marcar entregado (solo visual)
+        holder.btnMarcar?.setOnClickListener {
+            onMarcarEntregado?.invoke(pedido)
+            // Opcional: Toast visual
+            // Toast.makeText(it.context, "Marcado ✓", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun getItemCount() = pedidos.size

@@ -16,12 +16,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.granineaapp.R
 import com.app.granineaapp.adapter.PedidoAdapter
 import com.app.granineaapp.data.FakeData
-import com.app.granineaapp.model.EstadoPedido
 import com.app.granineaapp.model.Pedido
 import com.app.granineaapp.ui.main.admin.pedidos.DetallePedidoActivity
 import com.app.granineaapp.ui.main.admin.pedidos.ListaPedidosFragment
 import com.app.granineaapp.ui.main.admin.usuarios.ListaUsuariosFragment
 import com.google.android.material.navigation.NavigationView
+import com.app.granineaapp.ui.main.admin.productos.CatalogoAdminFragment
+import com.app.granineaapp.ui.main.perfil.EditarPerfilFragment
 
 class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -72,7 +73,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     // ==================== CONFIGURACIÓN DE BOTONES PRINCIPALES ====================
     private fun configurarBotones() {
         findViewById<View>(R.id.btnAdminGestionarProductos).setOnClickListener {
-            cargarFragment(ListaUsuariosFragment(), "Productos")
+            cargarFragment(CatalogoAdminFragment(), "Catálogo - Admin")  // ✅ Nuevo fragment admin
         }
         findViewById<View>(R.id.btnAdminGestionarPedidos).setOnClickListener {
             cargarFragment(ListaPedidosFragment(), "Pedidos")
@@ -146,15 +147,13 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                 cargarFragment(ListaPedidosFragment(), "Pedidos")
             }
             R.id.nav_productos -> {
-                cargarFragment(ListaPedidosFragment(), "Productos")
+                cargarFragment(CatalogoAdminFragment(), "Catálogo - Admin")  // ✅ Nuevo fragment admin
             }
             R.id.nav_usuarios -> {
                 cargarFragment(ListaUsuariosFragment(), "Usuarios")
             }
             R.id.nav_perfil -> {
-                // Aquí iría a PerfilFragment cuando lo tengas
-                Toast.makeText(this, "Perfil en desarrollo", Toast.LENGTH_SHORT).show()
-                drawerLayout.closeDrawer(GravityCompat.START)
+                cargarFragment(EditarPerfilFragment(), "Mi Perfil")
             }
         }
         return true

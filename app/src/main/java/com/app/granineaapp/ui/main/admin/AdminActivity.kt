@@ -20,7 +20,6 @@ import com.app.granineaapp.model.EstadoPedido
 import com.app.granineaapp.model.Pedido
 import com.app.granineaapp.ui.main.admin.pedidos.DetallePedidoActivity
 import com.app.granineaapp.ui.main.admin.pedidos.ListaPedidosFragment
-import com.app.granineaapp.ui.main.admin.productos.ListaProductosFragment
 import com.app.granineaapp.ui.main.admin.usuarios.ListaUsuariosFragment
 import com.google.android.material.navigation.NavigationView
 
@@ -63,44 +62,17 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         // Configurar Navigation Drawer
         configurarDrawer()
 
-        // Cargar datos iniciales
-        cargarEstadisticas()
-        configurarRecycler()
+
         configurarBotones()
         cargarInfoAdminEnHeader()
     }
 
-    override fun onResume() {
-        super.onResume()
-        // Solo actualizar si estamos en el home (no en un fragment)
-        if (contenedorFragments.visibility == View.GONE) {
-            cargarEstadisticas()
-            pedidoAdapter.actualizarLista(FakeData.pedidosPendientes().take(5))
-        }
-    }
 
-    // ==================== LÓGICA DE ESTADÍSTICAS ====================
-    private fun cargarEstadisticas() {
-        tvUsuariosCount.text = FakeData.totalUsuariosRegistrados.toString()
-        tvPedidosCount.text = FakeData.pedidosHoy.toString()
-        tvProductosCount.text = FakeData.productosDisponibles.toString()
-    }
-
-    // ==================== CONFIGURACIÓN DEL RECYCLER ====================
-    private fun configurarRecycler() {
-        pedidoAdapter = PedidoAdapter(
-            pedidos = FakeData.pedidosPendientes().take(5),
-            onVerDetalle = { pedido -> abrirDetallePedido(pedido) },
-            onMarcarEntregado = { pedido -> marcarEntregado(pedido) }
-        )
-        rvPedidosPendientes.layoutManager = LinearLayoutManager(this)
-        rvPedidosPendientes.adapter = pedidoAdapter
-    }
 
     // ==================== CONFIGURACIÓN DE BOTONES PRINCIPALES ====================
     private fun configurarBotones() {
         findViewById<View>(R.id.btnAdminGestionarProductos).setOnClickListener {
-            cargarFragment(ListaProductosFragment(), "Productos")
+            cargarFragment(ListaUsuariosFragment(), "Productos")
         }
         findViewById<View>(R.id.btnAdminGestionarPedidos).setOnClickListener {
             cargarFragment(ListaPedidosFragment(), "Pedidos")
@@ -160,8 +132,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
         // Restaurar título y recargar datos
         supportActionBar?.title = "Gestionar"
-        cargarEstadisticas()
-        pedidoAdapter.actualizarLista(FakeData.pedidosPendientes().take(5))
+
     }
 
     // ==================== NAVEGACIÓN DEL MENÚ LATERAL ====================
@@ -175,7 +146,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                 cargarFragment(ListaPedidosFragment(), "Pedidos")
             }
             R.id.nav_productos -> {
-                cargarFragment(ListaProductosFragment(), "Productos")
+                cargarFragment(ListaPedidosFragment(), "Productos")
             }
             R.id.nav_usuarios -> {
                 cargarFragment(ListaUsuariosFragment(), "Usuarios")
@@ -202,15 +173,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     // ==================== MARCAR PEDIDO COMO ENTREGADO ====================
-    private fun marcarEntregado(pedido: Pedido) {
-        val index = FakeData.pedidos.indexOfFirst { it.id == pedido.id }
-        if (index != -1) {
-            FakeData.pedidos[index] = pedido.copy(estado = EstadoPedido.ENTREGADO)
-            pedidoAdapter.actualizarLista(FakeData.pedidosPendientes().take(5))
-            cargarEstadisticas()
-            Toast.makeText(this, "Pedido marcado como entregado", Toast.LENGTH_SHORT).show()
-        }
-    }
+
 
     // ==================== CARGAR INFO DEL ADMIN EN EL HEADER ====================
     private fun cargarInfoAdminEnHeader() {

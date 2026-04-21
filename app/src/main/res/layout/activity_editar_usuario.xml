@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:padding="16dp">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvTituloEditarUsuario"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Editar usuario"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:paddingBottom="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Nombre y Apellido -->
+    <TextView
+        android:id="@+id/labelNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nombre y apellido *"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloEditarUsuario"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etUsuarioNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Ej: Juan Pérez"
+        android:inputType="textPersonName"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/labelNombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Correo Electrónico -->
+    <TextView
+        android:id="@+id/labelCorreo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Correo electrónico *"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/etUsuarioNombre"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etUsuarioCorreo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="ejemplo@correo.com"
+        android:inputType="textEmailAddress"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/labelCorreo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Número Celular -->
+    <TextView
+        android:id="@+id/labelCelular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Número de celular *"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/etUsuarioCorreo"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etUsuarioCelular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Ej: 3001234567"
+        android:inputType="phone"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/labelCelular"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Rol (Spinner) -->
+    <TextView
+        android:id="@+id/labelRol"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Rol *"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/etUsuarioCelular"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerUsuarioRol"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:popupBackground="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/labelRol"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botones de Acción -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnVolverUsuario"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="Volver"
+            android:backgroundTint="@color/color_perfil"
+            android:textColor="@color/text_white" />
+
+        <Button
+            android:id="@+id/btnGuardarUsuario"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="Guardar"
+            android:backgroundTint="@color/primary"
+            android:textColor="@color/text_white" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

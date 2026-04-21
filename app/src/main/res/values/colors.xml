@@ -1,8 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="red">#EF0E0E</color>
+
+    <!-- Colores base -->
+    <color name="white">#FFFFFF</color>          <!-- Blanco puro -->
+    <color name="black">#000000</color>          <!-- Negro puro -->
+    <color name="gray">#888888</color>           <!-- Gris medio -->
+    <color name="gray_light">#E0E0E0</color>     <!-- Gris más claro -->
+    <color name="green">#008000</color>          <!-- Verde más claro -->
+    <color name="orange">#EF6C00</color>         <!-- Naranja -->
+    <color name="red">#830A0A</color>            <!-- Rojo -->
+    <color name="blue">#1565C0</color>   <!-- Azul más profundo -->
+    <color name="purple">#7B1FA2</color>  <!-- Púrpura más intenso -->
+    <color name="gris">#FFFAFA</color>       <!-- Gris oscuro -->
+
+
+
+
+        <!-- Colores Primarios (Header y elementos principales) -->
+        <color name="primary">#2E7D32</color>        <!-- Verde más oscuro/profesional -->
+        <color name="primary_dark">#1B5E20</color>    <!-- Verde para estados pressed -->
+        <color name="primary_light">#E8F5E9</color>   <!-- Verde muy claro para fondos -->
+        <color name="accent">#1976D2</color>          <!-- Azul más saturado para acciones -->
+
+        <!-- Colores por Sección (Cards y botones) -->
+        <color name="color_pedidos">#1565C0</color>   <!-- Azul más profundo -->
+        <color name="color_productos">#EF6C00</color> <!-- Naranja más vibrante -->
+        <color name="color_usuarios">#7B1FA2</color>  <!-- Púrpura más intenso -->
+        <color name="color_perfil">#455A64</color>    <!-- Gris-azulado más elegante -->
+
+        <!-- Colores de Estado (Badges y etiquetas) -->
+        <color name="estado_pendiente">#FFA000</color>    <!-- Ámbar para pendiente -->
+        <color name="estado_confirmado">#0288D1</color>   <!-- Azul para confirmado -->
+        <color name="estado_entregado">#388E3C</color>    <!-- Verde para entregado -->
+        <color name="estado_cancelado">#D32F2F</color>    <!-- Rojo para cancelado -->
+
+        <!-- Colores de Texto (Jerarquía visual) -->
+        <color name="text_primary">#1A1A1A</color>    <!-- Casi negro para títulos -->
+
+        <color name="text_hint">#757575</color>       <!-- Gris medio para hints -->
+        <color name="text_white">#FFFFFF</color>      <!-- Blanco puro -->
+
+        <!-- Colores de Fondo (Superficies y contenedores) -->
+        <color name="background_primary">#FAFAFA</color>   <!-- Blanco humo muy claro -->
+        <color name="background_white">#FFFFFF</color>     <!-- Blanco puro para cards -->
+        <color name="background_card">#FFFFFF</color>      <!-- Blanco para tarjetas -->
+
+        <!-- Colores Diversos (Utilitarios) -->
+        <color name="divider">#E0E0E0</color>    <!-- Gris muy claro para separadores -->
+        <color name="error">#C62828</color>      <!-- Rojo oscuro para errores -->
+        <color name="success">#2E7D32</color>    <!-- Verde primario para éxitos -->
+
+
+
     <color name="color_fondo">#000000</color>
     <color name="colorverde_letra">#3AFF64</color>
     <color name="colornegro_letra">#000000</color>
@@ -13,4 +62,5 @@
     <color name="text_secondary">#AAAAAA</color>
     <color name="divider_color">#333333</color>
     <color name="radio_button_unselected">#666666</color>
+
 </resources>

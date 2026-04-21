@@ -24,37 +24,6 @@ class ListaPedidosFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_listapedidos, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        rvPedidos = view.findViewById(R.id.rvTodosPedidos)
-        configurarAdapter()
-    }
 
-    override fun onResume() {
-        super.onResume()
-        adapter.actualizarLista(FakeData.pedidosPendientes())
-    }
 
-    private fun configurarAdapter() {
-        adapter = PedidoAdapter(
-            pedidos = FakeData.pedidosPendientes(),
-            onVerDetalle = { pedido -> abrirDetalle(pedido) },
-            onMarcarEntregado = { pedido -> marcarEntregado(pedido) }
-        )
-        rvPedidos.layoutManager = LinearLayoutManager(requireContext())
-        rvPedidos.adapter = adapter
-    }
-
-    private fun abrirDetalle(pedido: Pedido) {
-        val intent = Intent(requireContext(), DetallePedidoActivity::class.java)
-        intent.putExtra("pedido_id", pedido.id)
-        startActivity(intent)
-    }
-
-    private fun marcarEntregado(pedido: Pedido) {
-        val index = FakeData.pedidos.indexOfFirst { it.id == pedido.id }
-        if (index != -1) {
-            FakeData.pedidos[index] = pedido.copy(estado = EstadoPedido.ENTREGADO)
-            adapter.actualizarLista(FakeData.pedidosPendientes())
-        }
-    }
 }

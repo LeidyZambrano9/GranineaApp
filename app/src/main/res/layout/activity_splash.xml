@@ -2,10 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/color_fondo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_fondo"
+    android:background="@android:color/black"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".ui.inicio.SplashActivity">
@@ -14,11 +13,6 @@
         android:id="@+id/logo_splash"
         android:layout_width="283dp"
         android:layout_height="275dp"
-        android:layout_marginTop="50dp"
         app:srcCompat="@drawable/logo_graninea" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
 
 </LinearLayout>

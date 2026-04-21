@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.productos.CatalogoFragment">
+    android:orientation="vertical"
+    android:background="@color/color_fondo">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- LOGO (AJUSTADO) -->
+    <ImageView
+        android:id="@+id/logo_catalogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/logo_graninea"
+        android:scaleType="fitCenter"
+        android:maxHeight="100dp"
+        android:adjustViewBounds="true"/>
+
+    <!-- BUSCADOR -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-</FrameLayout>
+        <EditText
+            android:id="@+id/buscador"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:hint="chocorramo"
+            android:background="@drawable/bg_search"
+            android:padding="10dp"/>
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_cart"
+            android:background="@drawable/bg_search"
+            android:padding="10dp"/>
+    </LinearLayout>
+
+    <!-- FILTROS -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:text="sin licor"
+            style="@style/FiltroStyle"/>
+
+        <TextView
+            android:text="con licor"
+            style="@style/FiltroStyle"/>
+
+        <TextView
+            android:text="XL"
+            style="@style/FiltroStyle"/>
+    </LinearLayout>
+
+    <!-- LISTA PRODUCTOS -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_productos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="10dp"/>
+
+</LinearLayout>

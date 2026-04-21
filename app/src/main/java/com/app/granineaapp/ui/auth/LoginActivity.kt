@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.app.granineaapp.R
 import com.app.granineaapp.ui.inicio.HomeActivity
+import com.app.granineaapp.ui.main.MainActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,8 +22,8 @@ class LoginActivity : AppCompatActivity() {
 
         // 2. Acción para el botón de Inicio (BLOQUEADO POR AHORA)
         btnIniciarSesion?.setOnClickListener {
-            // Quitamos el Intent al Home. Solo mostramos un mensaje.
-            Toast.makeText(this, "Ingreso no disponible aún", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         // 3. Acción para "Crear Cuenta" (Ir al Registro)

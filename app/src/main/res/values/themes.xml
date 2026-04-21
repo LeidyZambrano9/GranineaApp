@@ -6,4 +6,7 @@
     </style>
 
     <style name="Theme.GranineaApp" parent="Base.Theme.GranineaApp" />
+    <style name="Theme.App.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
 </resources>

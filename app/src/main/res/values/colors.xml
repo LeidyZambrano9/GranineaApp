@@ -2,7 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#EF0E0E</color>
     <color name="color_fondo">#000000</color>
     <color name="colorverde_letra">#3AFF64</color>
     <color name="colornegro_letra">#000000</color>
+
+    <!-- Nuevos colores para mejor UI -->
+    <color name="card_background">#1A1A1A</color>
+    <color name="bg_card_dark">#1A1A1A</color>
+    <color name="text_secondary">#AAAAAA</color>
+    <color name="divider_color">#333333</color>
+    <color name="radio_button_unselected">#666666</color>
 </resources>

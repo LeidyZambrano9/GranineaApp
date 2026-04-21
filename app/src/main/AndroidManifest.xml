@@ -8,12 +8,18 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_foreground"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GranineaApp">
 
+        <!-- Pantalla de Inicio (Splash) -->
         <activity
-            android:name=".ui.inicio.SplashActivity"
+            android:name="com.app.granineaapp.ui.main.MainActivity"
+            android:theme="@style/Theme.App.Splash"
+            android:exported="false" />
+
+        <activity
+            android:name="com.app.granineaapp.ui.inicio.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,11 +27,36 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.inicio.HomeActivity" android:exported="false" />
-        <activity android:name=".ui.auth.LoginActivity" android:exported="false" />
-        <activity android:name=".ui.auth.RegistroActivity" android:exported="false" />
+        <!-- Autenticación -->
+        <activity
+            android:name="com.app.granineaapp.ui.auth.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.app.granineaapp.ui.auth.RegistroActivity"
+            android:exported="false" />
 
-        <activity android:name=".ui.main.MainActivity" android:exported="false" />
+        <!-- Flujo Principal -->
+        <activity
+            android:name="com.app.granineaapp.ui.inicio.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.app.granineaapp.ui.main.productos.DetalleProductoActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.app.granineaapp.ui.main.perfil.EditarPerfilActivity"
+            android:exported="false" />
+
+        <!-- Administración -->
+        <activity
+            android:name="com.app.granineaapp.ui.main.admin.AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.app.granineaapp.ui.main.admin.productos.CrearProductoActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.app.granineaapp.ui.main.admin.productos.EditarProductoActivity"
+            android:exported="false" />
 
     </application>
+
 </manifest>

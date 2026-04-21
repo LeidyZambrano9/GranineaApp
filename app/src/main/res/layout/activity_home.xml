@@ -10,7 +10,6 @@
     android:orientation="vertical"
     tools:context=".ui.inicio.HomeActivity">
 
-
     <ImageView
         android:id="@+id/logo_home"
         android:layout_width="250dp"
@@ -26,13 +25,10 @@
         android:id="@+id/Bienvenida_home"
         android:layout_width="337dp"
         android:layout_height="140dp"
-        android:fontFamily="@font/tirodevanagarisanskrititalic"
         android:gravity="center_horizontal"
         android:text="Refrescamos tus momentos con el toque perfecto. Disfruta de granizados artesanales con o sin alcohol. Tú eliges el frío, nosotros el sabor."
         android:textColor="@color/white"
-        android:textSize="22sp"
-        app:fontFamily="@font/tirodevanagarisanskrititalic" />
-
+        android:textSize="22sp" />
 
     <Button
         android:id="@+id/botonComienzaHome"

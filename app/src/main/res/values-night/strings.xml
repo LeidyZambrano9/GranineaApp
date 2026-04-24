@@ -116,5 +116,4 @@
     <string name="nombre_y_apellido">Nombre y Apellido</string>
     <string name="correo_informacion_personal">Correo electrónico</string>
     <string name="numero_informacion_personal">Número celular</string>
-    <string name="boton_editar_informacion">Editar Información</string>
 </resources>

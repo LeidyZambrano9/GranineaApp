@@ -82,7 +82,7 @@
             android:id="@+id/btn_editarIP"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="@string/boton_editar_informacion"
+            android:text="Editar Información"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:backgroundTint="@color/colorverde_letra"

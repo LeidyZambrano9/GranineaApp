@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.app.granineaapp.R
 import com.app.granineaapp.ui.main.carrito.CarritoFragment
@@ -13,6 +14,9 @@ import com.app.granineaapp.ui.main.productos.CatalogoFragment
 import com.app.granineaapp.ui.inicio.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import android.content.Intent
+import androidx.core.view.GravityCompat
+import com.app.granineaapp.ui.main.admin.AdminActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,6 +59,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.catalogoProductos -> cargarFragment(CatalogoFragment())
                 R.id.carritoCompras -> cargarFragment(CarritoFragment())
                 R.id.miPerfil -> cargarFragment(EditarPerfilFragment())
+                // ✅ NUEVO: Abrir AdminActivity
+                R.id.nav_admin -> {
+                    val intent = Intent(this, AdminActivity::class.java)
+                    startActivity(intent)
+                    // Opcional: cerrar el drawer después de seleccionar
+                    findViewById<DrawerLayout>(R.id.drawer_layout)?.closeDrawer(GravityCompat.START)
+                }
             }
             true
         }

@@ -14,10 +14,21 @@
 
         <!-- Pantalla de Inicio (Splash) -->
         <activity
+            android:name=".ui.main.admin.usuarios.EditarUsuarioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.admin.pedidos.DetallePedidoActivity"
+            android:exported="false" />
+        <activity
             android:name="com.app.granineaapp.ui.main.MainActivity"
             android:theme="@style/Theme.App.Splash"
             android:exported="false" />
-
+        <activity
+            android:name=".ui.main.admin.productos.EditarProductoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.admin.productos.CrearProductoActivity"
+            android:exported="false" />
         <activity
             android:name="com.app.granineaapp.ui.inicio.SplashActivity"
             android:exported="true">
@@ -40,21 +51,12 @@
             android:name="com.app.granineaapp.ui.inicio.HomeActivity"
             android:exported="false" />
         <activity
-            android:name="com.app.granineaapp.ui.main.productos.DetalleProductoActivity"
-            android:exported="false" />
-        <activity
             android:name="com.app.granineaapp.ui.main.perfil.EditarPerfilActivity"
             android:exported="false" />
 
         <!-- Administración -->
         <activity
             android:name="com.app.granineaapp.ui.main.admin.AdminActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.app.granineaapp.ui.main.admin.productos.CrearProductoActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.app.granineaapp.ui.main.admin.productos.EditarProductoActivity"
             android:exported="false" />
 
     </application>

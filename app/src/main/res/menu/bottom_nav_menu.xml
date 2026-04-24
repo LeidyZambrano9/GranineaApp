@@ -19,4 +19,11 @@
         android:id="@+id/miPerfil"
         android:title="@string/mi_perfil"
         android:icon="@android:drawable/bottom_bar" />
+    <!-- ✅ NUEVO: Acceso al Panel Admin (solo visual/testing) -->
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_admin"
+            android:title="🔐 Panel Admin"
+            android:icon="@android:drawable/ic_menu_manage" />
+    </group>
 </menu>

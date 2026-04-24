@@ -1,10 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.admin.productos.CrearProductoActivity">
+    android:background="@color/black"
+    android:padding="16dp">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvTituloCrear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/agregar_producto2"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:paddingBottom="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Nombre -->
+    <TextView
+        android:id="@+id/labelNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/nombre"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloCrear"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etCrearNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/ej_granizado_de_fresa"
+        android:inputType="text"
+        android:backgroundTint="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/labelNombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Descripción -->
+    <TextView
+        android:id="@+id/labelDescripcion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Descripción"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/etCrearNombre"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etCrearDescripcion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Detalles del producto"
+        android:inputType="textMultiLine"
+        android:minLines="2"
+        android:backgroundTint="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/labelDescripcion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Precio y Tamaño (en fila) -->
+    <LinearLayout
+        android:id="@+id/rowPrecioTamanio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/etCrearDescripcion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Precio *"
+                android:textSize="14sp"
+                android:textColor="@color/white" />
+
+            <EditText
+                android:id="@+id/etCrearPrecio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ej: 2000"
+                android:inputType="numberDecimal"
+                android:backgroundTint="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tamaño *"
+                android:textSize="14sp"
+                android:textColor="@color/white" />
+
+            <EditText
+                android:id="@+id/etCrearTamanio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ej: 500ml"
+                android:inputType="text"
+                android:backgroundTint="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Sabores -->
+    <TextView
+        android:id="@+id/labelSabores"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sabores disponibles (separados por coma)"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/rowPrecioTamanio"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/etCrearSabores"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Ej: fresa, mango, chocolate"
+        android:inputType="text"
+        android:backgroundTint="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/labelSabores"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botón Guardar -->
+    <Button
+        android:id="@+id/btnGuardarProducto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Crear producto"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/text_white"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

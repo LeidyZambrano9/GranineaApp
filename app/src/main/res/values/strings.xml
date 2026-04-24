@@ -1,6 +1,36 @@
 <resources>
     <string name="app_name">GranineaApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="nav_open">Abrir menú de navegación</string>
+    <string name="nav_close">Cerrar menú de navegación</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="usuarios">Usuarios</string>
+    <string name="_0">0</string>
+    <string name="pedidos_hoy">Pedidos hoy</string>
+    <string name="_2">0</string>
+    <string name="productos">Productos</string>
+    <string name="_3">0</string>
+    <string name="pedidos_pendientes">Pedidos pendientes</string>
+    <string name="productos1">Productos</string>
+    <string name="pedidos">Pedidos</string>
+    <string name="usuarios1">Usuarios</string>
+    <string name="mostrar_todos_los_pedidos1">Mostrar todos los pedidos</string>
+    <string name="pedido_32">Pedido #32</string>
+    <string name="cliente_adriana_guti_rrez">Cliente: Adriana Gutiérrez</string>
+    <string name="productos_n_granizado_fresa_n_cantidad_2_precio_4_000_n_granizado_mango_n_cantidad_2_precio_6_000">Productos:\n• Granizado fresa\n Cantidad: 2 Precio: $4.000\n• Granizado mango\n Cantidad: 2 Precio: $6.000</string>
+    <string name="total_18_000">Total: $18.000</string>
+    <string name="marcar_como_entregado">Marcar como entregado</string>
+    <string name="volver">Volver</string>
+    <string name="usuarios_registrados">Usuarios registrados</string>
+    <string name="volver2">Volver</string>
+    <string name="todos_los_pedidos">Todos los pedidos</string>
+    <string name="buscar_producto">Buscar producto...</string>
+    <string name="productos_disponibles">Productos disponibles</string>
+    <string name="agregar_producto">Agregar producto</string>
+    <string name="editar_producto">Editar producto</string>
+    <string name="agregar_producto2">Agregar producto</string>
+    <string name="nombre">Nombre *</string>
+    <string name="ej_granizado_de_fresa">Ej: Granizado de fresa</string>
     <string name="nuestros_productos">Nuestros productos</string>
     <string name="navigation_drawer_open">Menu Abierto</string>
     <string name="navigation_drawer_close">Menu Cerrado</string>

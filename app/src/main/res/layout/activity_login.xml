@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/island_moments"
-        android:text="Iniciar Sesion En Graninea"
+        android:text="@string/iniciar_sesion_login"
         android:textColor="@color/colorverde_letra"
         android:textSize="35sp"
         android:textStyle="bold"
@@ -39,7 +39,7 @@
             android:layout_width="340dp"
             android:layout_height="55dp"
             android:background="@drawable/imagen_campo_formulario"
-            android:hint="CORREO ELECTRONICO"
+            android:hint="@string/placeholder_correo"
             android:inputType="textEmailAddress"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
@@ -54,7 +54,7 @@
             android:layout_height="55dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/imagen_campo_formulario"
-            android:hint="CONTRASEÑA"
+            android:hint="@string/placeholder_contrasena"
             android:inputType="textPassword"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
@@ -71,7 +71,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="25dp"
         android:backgroundTint="@color/colorverde_letra"
-        android:text="Iniciar Sesion"
+        android:text="@string/boton_iniciar_sesion"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp"
@@ -83,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Restablecer Contraseña"
+        android:text="@string/restablecer_contra_login"
         android:textColor="#0066CC"
         android:textSize="14sp" />
 
@@ -96,7 +96,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¿No Tienes Cuenta? "
+            android:text="@string/no_tienes_cuenta"
             android:textColor="@android:color/white"
             android:textSize="14sp" />
 
@@ -104,7 +104,7 @@
             android:id="@+id/txtCrearCuenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Crear Cuenta"
+            android:text="@string/crear_cuenta"
             android:textColor="#0066CC"
             android:textSize="14sp"
             android:textStyle="bold" />

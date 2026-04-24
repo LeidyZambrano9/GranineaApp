@@ -11,7 +11,7 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="15dp"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
-        android:tint="#00FF7F"
+        android:tint="@color/colorverde_letra"
         android:clickable="true"
         android:focusable="true"/>
 
@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Información Personal"
+            android:text="@string/informacion_personal_fragment"
             android:textColor="#39FF88"
             android:textSize="22sp"
             android:textStyle="italic"
@@ -47,7 +47,8 @@
             android:id="@+id/et_nombreIP"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Nombre y Apellido"
+            android:hint="@string/nombre_y_apellido"
+            android:textColorHint="@color/black"
             android:background="@drawable/bg_edittext"
             android:padding="12dp"
             android:layout_marginBottom="10dp"/>
@@ -57,8 +58,9 @@
             android:id="@+id/et_emailIP"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Correo electrónico"
+            android:hint="@string/correo_informacion_personal"
             android:inputType="textEmailAddress"
+            android:textColorHint="@color/black"
             android:background="@drawable/bg_edittext"
             android:padding="12dp"
             android:layout_marginBottom="10dp"/>
@@ -68,8 +70,9 @@
             android:id="@+id/et_telefonoIP"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Número celular"
+            android:hint="@string/numero_informacion_personal"
             android:inputType="phone"
+            android:textColorHint="@color/black"
             android:background="@drawable/bg_edittext"
             android:padding="12dp"
             android:layout_marginBottom="20dp"/>
@@ -79,7 +82,7 @@
             android:id="@+id/btn_editarIP"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="Editar Información"
+            android:text="@string/boton_editar_informacion"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:backgroundTint="@color/colorverde_letra"

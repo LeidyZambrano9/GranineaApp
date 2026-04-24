@@ -26,7 +26,7 @@
         android:layout_width="337dp"
         android:layout_height="140dp"
         android:gravity="center_horizontal"
-        android:text="Refrescamos tus momentos con el toque perfecto. Disfruta de granizados artesanales con o sin alcohol. Tú eliges el frío, nosotros el sabor."
+        android:text="@string/bienvenida_home"
         android:textColor="@color/white"
         android:textSize="22sp" />
 
@@ -36,7 +36,7 @@
         android:layout_height="70dp"
         android:layout_marginTop="25dp"
         android:backgroundTint="@color/colorverde_letra"
-        android:text="Comienza"
+        android:text="@string/boton_home"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="23sp"
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Registrate"
+        android:text="@string/registrate_home"
         android:textColor="@color/colorverde_letra"
         android:textSize="14sp" />
 

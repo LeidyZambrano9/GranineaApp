@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:contentDescription="Imagen del producto" />
+                android:contentDescription="@string/imagen_del_producto_detalle" />
 
             <View
                 android:layout_width="match_parent"
@@ -35,8 +35,8 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/bg_circle_black"
                 android:src="@android:drawable/ic_menu_close_clear_cancel"
-                android:contentDescription="Cerrar detalle"
-                android:tint="@color/white" />
+                android:contentDescription="@string/cerrar_detalle"
+                app:tint="@color/white" />
         </FrameLayout>
 
         <!-- CARD INFORMACIÓN -->
@@ -57,7 +57,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorverde_letra"
                 android:gravity="start"
-                android:text="Nombre del Producto" />
+                android:text="@string/nombre_del_producto_detalle" />
 
             <!-- PRECIO -->
             <TextView
@@ -69,7 +69,7 @@
                 android:textSize="22sp"
                 android:textColor="@color/white"
                 android:layout_marginTop="4dp"
-                android:text="$ 0.00" />
+                android:text="@string/valor_producto" />
 
             <!-- CONTENIDO DEL PRODUCTO -->
             <TextView
@@ -81,7 +81,7 @@
                 android:textColor="@color/text_secondary"
                 android:layout_marginTop="12dp"
                 android:lineSpacingExtra="4dp"
-                android:text="Descripción aquí" />
+                android:text="@string/descripcion_producto" />
 
             <View
                 android:layout_width="match_parent"
@@ -94,7 +94,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Elige tu sabor"
+                android:text="@string/elige_tu_sabor"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="18sp"/>
@@ -109,21 +109,21 @@
                     android:id="@+id/rb_uva"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Uva"
+                    android:text="@string/sabor1"
                     android:textColor="@color/white"
                     android:buttonTint="@color/colorverde_letra" />
                 <RadioButton
                     android:id="@+id/rb_maracumango"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Maracumango"
+                    android:text="@string/sabor2"
                     android:textColor="@color/white"
                     android:buttonTint="@color/colorverde_letra" />
                 <RadioButton
                     android:id="@+id/rb_mango_biche"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mango Biche"
+                    android:text="@string/sabor3"
                     android:textColor="@color/white"
                     android:buttonTint="@color/colorverde_letra" />
 
@@ -152,14 +152,14 @@
                         android:layout_height="36dp"
                         android:src="@android:drawable/ic_media_previous"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="Menos"
-                        android:tint="@color/colorverde_letra"/>
+                        android:contentDescription="@string/menos"
+                        app:tint="@color/colorverde_letra"/>
 
                     <TextView
                         android:id="@+id/tv_cantidad"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
-                        android:text="1"
+                        android:text="@string/cantidad_producto"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="@color/white"
@@ -171,8 +171,8 @@
                         android:layout_height="36dp"
                         android:src="@android:drawable/ic_media_next"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="Más"
-                        android:tint="@color/colorverde_letra"/>
+                        android:contentDescription="@string/mas"
+                        app:tint="@color/colorverde_letra"/>
                 </LinearLayout>
 
                 <!-- BOTÓN AGREGAR -->
@@ -181,7 +181,7 @@
                     android:layout_width="0dp"
                     android:layout_height="56dp"
                     android:layout_weight="1"
-                    android:text="AGREGAR AL CARRITO"
+                    android:text="@string/boton_agregar_al_carrito"
                     android:textStyle="bold"
                     android:layout_marginStart="16dp"
                     android:backgroundTint="@color/colorverde_letra"

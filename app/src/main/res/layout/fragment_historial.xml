@@ -23,8 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="✕"
-            android:textColor="#39FF14"
+            android:text="@string/cerrar"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             android:padding="4dp"
@@ -34,7 +34,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="HISTORIAL"
+            android:text="@string/historial_tittle"
             android:textColor="#1A1A6E"
             android:textSize="26sp"
             android:textStyle="bold"
@@ -46,7 +46,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="30 De Enero 2026"
+            android:text="@string/fecha1_historial"
             android:textColor="#1A1A6E"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -59,7 +59,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="22 De Enero 2026"
+            android:text="@string/fecha2_historial"
             android:textColor="#1A1A6E"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -72,7 +72,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="13 De Enero 2026"
+            android:text="@string/fecha3_historial"
             android:textColor="#1A1A6E"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -85,7 +85,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="03 De Enero 2026"
+            android:text="@string/fecha4_historial"
             android:textColor="#1A1A6E"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -98,7 +98,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="24 De Diciembre 2025"
+            android:text="@string/fecha5_historial"
             android:textColor="#1A1A6E"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -111,7 +111,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="07 De Diciembre 2025"
+            android:text="@string/fecha6_historial"
             android:textColor="#1A1A6E"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -128,7 +128,7 @@
         android:layout_height="56dp"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="16dp"
-        android:text="Mostrar Más"
+        android:text="@string/mostrar_mas_button"
         android:textStyle="bold|italic"
         android:textSize="18sp"
         android:textColor="#000000"

@@ -11,7 +11,7 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="15dp"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
-        android:tint="@color/colorverde_letra"
+        app:tint="@color/colorverde_letra"
         android:clickable="true"
         android:focusable="true"/>
 

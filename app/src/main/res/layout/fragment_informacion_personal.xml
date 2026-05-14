@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_fondo">
@@ -13,7 +15,7 @@
         android:src="@android:drawable/ic_menu_close_clear_cancel"
         app:tint="@color/colorverde_letra"
         android:clickable="true"
-        android:focusable="true"/>
+        android:focusable="true" />
 
     <!-- CONTENIDO -->
     <LinearLayout
@@ -30,7 +32,7 @@
             android:layout_height="140dp"
             android:src="@drawable/logo_graninea"
             android:scaleType="fitCenter"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp" />
 
         <!-- TITULO -->
         <TextView
@@ -40,7 +42,7 @@
             android:textColor="#39FF88"
             android:textSize="22sp"
             android:textStyle="italic"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp" />
 
         <!-- NOMBRE -->
         <EditText
@@ -51,7 +53,7 @@
             android:textColorHint="@color/black"
             android:background="@drawable/bg_edittext"
             android:padding="12dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp" />
 
         <!-- EMAIL -->
         <EditText
@@ -63,7 +65,7 @@
             android:textColorHint="@color/black"
             android:background="@drawable/bg_edittext"
             android:padding="12dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp" />
 
         <!-- TELEFONO -->
         <EditText
@@ -75,7 +77,7 @@
             android:textColorHint="@color/black"
             android:background="@drawable/bg_edittext"
             android:padding="12dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp" />
 
         <!-- BOTON -->
         <Button
@@ -85,8 +87,7 @@
             android:text="Editar Información"
             android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:backgroundTint="@color/colorverde_letra"
-            />
+            android:backgroundTint="@color/colorverde_letra" />
 
     </LinearLayout>
 

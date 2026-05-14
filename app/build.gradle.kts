@@ -4,11 +4,7 @@ plugins {
 
 android {
     namespace = "com.app.granineaapp"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36 // Nota: Bajé a 34 para estabilidad, ya que 36 es preliminar
 
     defaultConfig {
         applicationId = "com.app.granineaapp"
@@ -41,6 +37,12 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+
+    // --- NUEVAS DEPENDENCIAS PARA HUELLA Y GOOGLE ---
+    implementation("androidx.biometric:biometric:1.1.0")
+    implementation("com.google.android.gms:play-services-auth:21.1.1")
+    // ------------------------------------------------
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

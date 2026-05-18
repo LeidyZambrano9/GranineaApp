@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_fondo">
@@ -82,7 +83,7 @@
             android:id="@+id/btn_editarIP"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="Editar Información"
+            android:text="@string/editar_informacion"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:backgroundTint="@color/colorverde_letra"

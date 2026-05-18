@@ -10,14 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.granineaapp.R
 
 class ProductoAdapter(
-    private val productos: List<Producto>,
+    private val productos: MutableList<Producto>,
     private val onClick: (Producto) -> Unit
 ) : RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
 
     inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imagen: ImageView = itemView.findViewById(R.id.img_producto)
-        val nombre: TextView = itemView.findViewById(R.id.tv_nombre)
-        val precio: TextView = itemView.findViewById(R.id.tv_precio)
+        val nombre: TextView  = itemView.findViewById(R.id.tv_nombre)
+        val precio: TextView  = itemView.findViewById(R.id.tv_precio)
         val btnAgregar: Button = itemView.findViewById(R.id.btn_agregar)
     }
 
@@ -36,15 +36,16 @@ class ProductoAdapter(
         holder.nombre.text = producto.nombre
         holder.precio.text = "$${producto.precio.toInt()}"
 
-        // Configuramos el click en el itemView (el CardView principal)
-        holder.itemView.setOnClickListener {
-            onClick(producto)
-        }
+        holder.itemView.setOnClickListener { onClick(producto) }
 
-        // Aseguramos que los elementos internos no consuman el click si queremos que todo el card sea cliqueable
-        // EXCEPTO el botón de agregar que tiene su propia acción
         holder.btnAgregar.setOnClickListener {
-            // Acción para agregar al carrito (se puede implementar después)
+            // Acción para agregar al carrito (implementar después)
         }
+    }
+
+    fun actualizarLista(nuevaLista: List<Producto>) {
+        productos.clear()
+        productos.addAll(nuevaLista)
+        notifyDataSetChanged()
     }
 }

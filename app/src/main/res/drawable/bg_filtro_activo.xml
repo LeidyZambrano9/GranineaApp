@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/bg_filtro_activo.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/colorverde_letra"/>   <!-- tu color de marca -->
+    <corners android:radius="20dp"/>
+    <padding
+        android:left="14dp"
+        android:top="6dp"
+        android:right="14dp"
+        android:bottom="6dp"/>
+</shape>

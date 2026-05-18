@@ -73,7 +73,7 @@
     <string name="total_carrito_fragment">Total:</string>
     <string name="valor_total_carrito">$ 0.00</string>
     <string name="boton_finalizar_pedido_carrito">FINALIZAR PEDIDO</string>
-    <string name="hint_busqueda_catalogo">chocorramo</string>
+    <string name="hint_busqueda_catalogo">El neita</string>
     <string name="sin_licor_filter">sin licor</string>
     <string name="con_licor_filter">con licor</string>
     <string name="xl_filter">XL</string>

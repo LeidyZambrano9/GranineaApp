@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="@color/color_fondo">
 
-    <!-- LOGO (AJUSTADO) -->
+    <!-- LOGO -->
     <ImageView
         android:id="@+id/logo_catalogo"
         android:layout_width="wrap_content"
@@ -31,36 +31,45 @@
             android:layout_weight="1"
             android:hint="@string/hint_busqueda_catalogo"
             android:background="@drawable/bg_search"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            android:inputType="text"
+            android:imeOptions="actionSearch"/>
 
         <ImageView
+            android:id="@+id/btn_carrito"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginStart="8dp"
             android:src="@drawable/ic_cart"
             android:background="@drawable/bg_search"
             android:padding="10dp"/>
+
     </LinearLayout>
 
-    <!-- FILTROS -->
+    <!-- FILTROS — cada TextView tiene su propio android:id -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:paddingHorizontal="8dp">
 
         <TextView
+            android:id="@+id/btn_sin_licor"
             android:text="@string/sin_licor_filter"
             style="@style/FiltroStyle"/>
 
         <TextView
+            android:id="@+id/btn_con_licor"
             android:text="@string/con_licor_filter"
             style="@style/FiltroStyle"/>
 
         <TextView
+            android:id="@+id/btn_xl"
             android:text="@string/xl_filter"
             style="@style/FiltroStyle"/>
+
     </LinearLayout>
 
     <!-- LISTA PRODUCTOS -->

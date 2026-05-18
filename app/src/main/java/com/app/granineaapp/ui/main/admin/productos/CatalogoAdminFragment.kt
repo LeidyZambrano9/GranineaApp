@@ -17,10 +17,10 @@ class CatalogoAdminFragment : Fragment() {
 
     // ✅ Lista visual de productos (dummy)
     private val listaProductos = listOf(
-        Producto("El chiki", 5000.0, R.drawable.atomo_imagen_chiki),
-        Producto("El neita", 15000.0, R.drawable.atomo_imagen_el_neita),
-        Producto("Chocopa", 30000.0, R.drawable.atomo_imagen_chocopa),
-        Producto("Litroski", 32000.0, R.drawable.atomo_imagen_litroski),
+        Producto("El chiki",   5000.0,  R.drawable.atomo_imagen_chiki,    "sin licor"),
+        Producto("El neita",   15000.0, R.drawable.atomo_imagen_el_neita, "con licor"),
+        Producto("Chocopa",    30000.0, R.drawable.atomo_imagen_chocopa,  "sin licor"),
+        Producto("litroski",   32000.0, R.drawable.atomo_imagen_litroski, "xl"),
     )
 
     override fun onCreateView(

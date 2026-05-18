@@ -10,14 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.granineaapp.R
 
 class ProductoAdapter(
-    private val productos: List<Producto>,
+    productos: List<Producto>,                  // ← acepta cualquier List (mutable o no)
     private val onClick: (Producto) -> Unit
 ) : RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
 
+    // Copia interna mutable para poder actualizar
+    private val productos: MutableList<Producto> = productos.toMutableList()
+
     inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imagen: ImageView = itemView.findViewById(R.id.img_producto)
-        val nombre: TextView = itemView.findViewById(R.id.tv_nombre)
-        val precio: TextView = itemView.findViewById(R.id.tv_precio)
+        val nombre: TextView  = itemView.findViewById(R.id.tv_nombre)
+        val precio: TextView  = itemView.findViewById(R.id.tv_precio)
         val btnAgregar: Button = itemView.findViewById(R.id.btn_agregar)
     }
 
@@ -36,15 +39,21 @@ class ProductoAdapter(
         holder.nombre.text = producto.nombre
         holder.precio.text = "$${producto.precio.toInt()}"
 
-        // Configuramos el click en el itemView (el CardView principal)
-        holder.itemView.setOnClickListener {
+        holder.itemView.setOnClickListener { onClick(producto) }
+
+        holder.btnAgregar.setOnClickListener {
+            // Reutiliza el mismo onClick para ir al detalle
             onClick(producto)
         }
+    }
 
-        // Aseguramos que los elementos internos no consuman el click si queremos que todo el card sea cliqueable
-        // EXCEPTO el botón de agregar que tiene su propia acción
-        holder.btnAgregar.setOnClickListener {
-            // Acción para agregar al carrito (se puede implementar después)
-        }
+    /**
+     * Reemplaza la lista mostrada y notifica al RecyclerView.
+     * Llamado desde CatalogoFragment cuando cambia el filtro o el buscador.
+     */
+    fun actualizarLista(nuevaLista: List<Producto>) {
+        productos.clear()
+        productos.addAll(nuevaLista)
+        notifyDataSetChanged()
     }
 }

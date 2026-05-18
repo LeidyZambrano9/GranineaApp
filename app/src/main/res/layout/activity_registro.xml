@@ -34,74 +34,6 @@
             android:textStyle="bold"
             android:layout_marginBottom="20dp" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardError"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:visibility="gone"
-            app:cardBackgroundColor="#D35442"
-            app:cardCornerRadius="12dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="15dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/no_fue_posible"
-                    android:textColor="#000000"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@android:drawable/ic_delete"
-                    app:tint="#8B2F23" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/TarjetaCuentacreadaRegistro"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:visibility="gone"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="12dp"> <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/exito_creacion"
-                android:textColor="#000000"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                android:lineSpacingExtra="2dp" />
-
-                <ImageView
-                    android:id="@+id/ImagenCuentaCreadaRegistro"
-                    android:layout_width="60dp"  android:layout_height="60dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/chulo_tarjetaverde_registro" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
         <LinearLayout
             android:id="@+id/layoutFormulario"
             android:layout_width="match_parent"
@@ -110,15 +42,30 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/RegistroNombre"
+                android:id="@+id/RegistroNombres"
                 android:layout_width="340dp"
                 android:layout_height="55dp"
                 android:background="@drawable/imagen_campo_formulario"
-                android:hint="@string/placeholder_np_registro"
+                android:gravity="center_vertical|start"
+                android:hint="@string/nombres"
                 android:inputType="textPersonName"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
+                android:textColor="@color/colornegro_letra"
+                android:textColorHint="#808080"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/RegistroApellidos"
+                android:layout_width="340dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/imagen_campo_formulario"
                 android:gravity="center_vertical|start"
+                android:hint="@string/apellidos"
+                android:inputType="textPersonName"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
                 android:textColor="@color/colornegro_letra"
                 android:textColorHint="#808080"
                 android:textSize="14sp" />
@@ -167,6 +114,32 @@
                 android:textColor="@color/colornegro_letra"
                 android:textColorHint="#808080"
                 android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/RegistroRepetirContraseña"
+                android:layout_width="340dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/imagen_campo_formulario"
+                android:gravity="center_vertical|start"
+                android:hint="@string/repetir_contrase_a"
+                android:inputType="textPassword"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/colornegro_letra"
+                android:textColorHint="#808080"
+                android:textSize="14sp" />
+
+            <CheckBox
+                android:id="@+id/CheckTerminos_Registro"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/tirodevanagarisanskrititalic"
+                android:text="Acepto los términos y condiciones"
+                android:textColor="@color/colorverde_letra"
+                android:textSize="16sp" />
+
         </LinearLayout>
 
         <Button
@@ -182,5 +155,33 @@
             android:textStyle="bold"
             app:cornerRadius="12dp" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/tirodevanagarisanskrititalic"
+                android:text="¿Ya tienes cuenta? "
+                android:textColor="@color/colorverde_letra"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txt_volver_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/tirodevanagarisanskrititalic"
+                android:text="Inicia sesión"
+                android:textColor="@color/text_white"
+                android:clickable="true"
+                android:focusable="true"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
     </LinearLayout>
+
 </ScrollView>

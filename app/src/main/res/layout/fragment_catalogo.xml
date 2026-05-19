@@ -46,7 +46,7 @@
 
     </LinearLayout>
 
-    <!-- FILTROS — cada TextView tiene su propio android:id -->
+    <!-- FILTROS -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,6 +71,14 @@
             style="@style/FiltroStyle"/>
 
     </LinearLayout>
+
+    <!-- PROGRESS BAR — visible mientras carga desde Supabase -->
+    <ProgressBar
+        android:id="@+id/progressBarCatalogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
     <!-- LISTA PRODUCTOS -->
     <androidx.recyclerview.widget.RecyclerView

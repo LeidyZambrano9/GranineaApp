@@ -2,7 +2,6 @@ package com.app.granineaapp.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -12,18 +11,20 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.app.granineaapp.R
+import com.app.granineaapp.SupabaseClient
 import com.app.granineaapp.ui.main.carrito.CarritoFragment
 import com.app.granineaapp.ui.main.perfil.EditarPerfilFragment
 import com.app.granineaapp.ui.main.productos.CatalogoFragment
 import com.app.granineaapp.ui.inicio.HomeFragment
 import com.app.granineaapp.data.UsuarioRepository
-// Importa tus fragments de admin
 import com.app.granineaapp.ui.main.admin.pedidos.ListaPedidosFragment
 import com.app.granineaapp.ui.main.admin.AdminHomeFragment
 import com.app.granineaapp.ui.main.admin.usuarios.ListaUsuariosFragment
 import com.app.granineaapp.ui.main.admin.productos.CatalogoAdminFragment
+import com.app.granineaapp.ui.auth.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import io.github.jan.supabase.auth.auth
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        // Listeners de navegación
+        // Bottom Nav (Navegación de secciones - Cerrar sesión eliminado de aquí)
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.inicio -> cargarFragment(HomeFragment())
@@ -64,6 +65,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        // Drawer Nav (Menú lateral)
         navView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.inicio -> cargarFragment(HomeFragment())
@@ -74,13 +76,29 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_pedidos -> cargarFragment(ListaPedidosFragment())
                 R.id.nav_productos -> cargarFragment(CatalogoAdminFragment())
                 R.id.nav_usuarios -> cargarFragment(ListaUsuariosFragment())
+                R.id.Cerrarsesion -> cerrarSesion() // Corregido: Coincide con el ID en menu_drawer.xml
             }
-            drawerLayout.closeDrawers()
+            drawerLayout.closeDrawer(GravityCompat.START)
             true
         }
 
-        // ✅ El estado inicial va DENTRO del coroutine, después de conocer el rol
         configurarPorRol(savedInstanceState)
+    }
+
+    private fun cerrarSesion() {
+        lifecycleScope.launch {
+            try {
+                SupabaseClient.client.auth.signOut()
+            } catch (e: Exception) {
+                android.util.Log.e("SESION", "Error al cerrar sesión: ${e.message}")
+            } finally {
+                // Redirige al Login y limpia el historial de actividades para que no se pueda volver atrás
+                val intent = Intent(this@MainActivity, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 
     private fun configurarPorRol(savedInstanceState: Bundle?) {
@@ -92,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                 val esAdmin = rol == "admin"
                 val menu = navView.menu
 
-                // Bottom Nav
+                // Bottom Nav solo para clientes
                 bottomNav.visibility = if (esAdmin) View.GONE else View.VISIBLE
 
                 // Drawer: opciones cliente
@@ -100,6 +118,9 @@ class MainActivity : AppCompatActivity() {
                 menu.findItem(R.id.catalogoProductos).isVisible = !esAdmin
                 menu.findItem(R.id.carritoCompras).isVisible = !esAdmin
                 menu.findItem(R.id.miPerfil).isVisible = !esAdmin
+                
+                // Cerrar sesión visible para todos en el menú lateral
+                menu.findItem(R.id.Cerrarsesion).isVisible = true
 
                 // Drawer: opciones admin
                 menu.findItem(R.id.nav_admin_home).isVisible = esAdmin
@@ -107,7 +128,7 @@ class MainActivity : AppCompatActivity() {
                 menu.findItem(R.id.nav_productos).isVisible = esAdmin
                 menu.findItem(R.id.nav_usuarios).isVisible = esAdmin
 
-                // ✅ Estado inicial según rol, solo la primera vez
+                // Fragment inicial
                 if (savedInstanceState == null) {
                     if (esAdmin) {
                         cargarFragment(AdminHomeFragment())
@@ -119,45 +140,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    private fun configurarPorRol() {
-        lifecycleScope.launch {
-            val rol = UsuarioRepository.obtenerRolActual()
-            android.util.Log.d("DEBUG_ROL", "Rol obtenido: $rol")
-
-            runOnUiThread {
-                val esAdmin = rol == "admin"
-                val menu = navView.menu
-
-                // --- Bottom Nav ---
-                // Admin no necesita el bottom nav
-                bottomNav.visibility = if (esAdmin) View.GONE else View.VISIBLE
-
-                // --- Drawer: opciones cliente ---
-                menu.findItem(R.id.inicio).isVisible = !esAdmin
-                menu.findItem(R.id.catalogoProductos).isVisible = !esAdmin
-                menu.findItem(R.id.carritoCompras).isVisible = !esAdmin
-                menu.findItem(R.id.miPerfil).isVisible = !esAdmin
-
-                // --- Drawer: opciones admin ---
-                menu.findItem(R.id.nav_admin_home).isVisible = esAdmin
-                menu.findItem(R.id.nav_pedidos).isVisible = esAdmin
-                menu.findItem(R.id.nav_productos).isVisible = esAdmin
-                menu.findItem(R.id.nav_usuarios).isVisible = esAdmin
-
-                // Cargar fragment inicial según rol
-                if (esAdmin) {
-                    cargarFragment(HomeFragment())
-                } else {
-                    cargarFragment(HomeFragment())
-                    bottomNav.selectedItemId = R.id.inicio
-                }
-            }
-        }
-    }
 
     private fun cargarFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            @Suppress("DEPRECATION")
+            super.onBackPressed()
+        }
     }
 }

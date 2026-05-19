@@ -135,4 +135,5 @@
     <string name="imagen_del_producto_edit_admin">Imagen del Producto</string>
     <string name="cambiar_imagen_edit_admin">📷 CAMBIAR IMAGEN</string>
     <string name="guardar_cambios_edit_admin">GUARDAR CAMBIOS</string>
+    <string name="cerrar_sesion">Cerrar sesion</string>
 </resources>

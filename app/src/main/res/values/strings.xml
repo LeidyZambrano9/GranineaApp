@@ -155,4 +155,5 @@
     <string name="contrase_a">CONTRASEÑA</string>
     <string name="repetir_contraseña">REPETIR CONTRASEÑA</string>
     <string name="contraseña">CONTRASEÑA</string>
+    <string name="cerrar_sesion">Cerrar sesion</string>
 </resources>

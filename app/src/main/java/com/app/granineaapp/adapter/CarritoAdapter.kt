@@ -7,6 +7,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.app.granineaapp.R
 import com.app.granineaapp.ui.main.carrito.CarritoItem
 
@@ -33,15 +34,25 @@ class CarritoAdapter(
 
     override fun onBindViewHolder(holder: CarritoViewHolder, position: Int) {
         val item = items[position]
-        holder.tvNombre.text = item.nombre
-        holder.tvSabor.text = "Sabor: ${item.sabor}"
-        holder.tvPrecio.text = "$${(item.precio * item.cantidad).toInt()}"
+        holder.tvNombre.text   = item.nombre
+        holder.tvSabor.text    = "Sabor: ${item.sabor}"
+        holder.tvPrecio.text   = "$${(item.precio * item.cantidad).toInt()}"
         holder.tvCantidad.text = "Cant: ${item.cantidad}"
-        holder.imgProducto.setImageResource(item.imagenRes)
 
-        holder.btnEliminar.setOnClickListener {
-            onRemoveClick(item)
+        // Prioriza URL de Supabase, si no hay usa recurso local
+        if (item.imagenUrl.isNotEmpty()) {
+            holder.imgProducto.load(item.imagenUrl) {
+                crossfade(true)
+                placeholder(R.drawable.logo_graninea)
+                error(R.drawable.logo_graninea)
+            }
+        } else if (item.imagenRes != 0) {
+            holder.imgProducto.setImageResource(item.imagenRes)
+        } else {
+            holder.imgProducto.setImageResource(R.drawable.logo_graninea)
         }
+
+        holder.btnEliminar.setOnClickListener { onRemoveClick(item) }
     }
 
     override fun getItemCount(): Int = items.size

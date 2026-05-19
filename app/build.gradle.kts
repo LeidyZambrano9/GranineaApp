@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.app.granineaapp"
-    compileSdk = 36 // Nota: Bajé a 34 para estabilidad, ya que 36 es preliminar
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.app.granineaapp"
         minSdk = 31
-        targetSdk = 36
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -39,17 +39,20 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-
+    // Supabase
     implementation(platform(libs.supabase.bom))
     implementation(libs.supabase.postgrest)
     implementation(libs.supabase.auth)
+    implementation(libs.supabase.storage)
     implementation(libs.ktor.client.android)
     implementation(libs.kotlinx.serialization.json)
 
-    // --- NUEVAS DEPENDENCIAS PARA HUELLA Y GOOGLE ---
+    // Coil para carga de imágenes desde URL
+    implementation(libs.coil)
+
+    // Huella y Google Auth
     implementation("androidx.biometric:biometric:1.1.0")
     implementation("com.google.android.gms:play-services-auth:21.1.1")
-    // ------------------------------------------------
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

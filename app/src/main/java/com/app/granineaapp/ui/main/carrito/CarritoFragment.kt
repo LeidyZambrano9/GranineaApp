@@ -47,10 +47,11 @@ class CarritoFragment : Fragment() {
             if (items.isEmpty()) {
                 Toast.makeText(requireContext(), "El carrito está vacío", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), "Procesando pedido...", Toast.LENGTH_SHORT).show()
-                // Aquí podrías limpiar el carrito después de la compra
-                // CartManager.limpiarCarrito()
-                // parentFragmentManager.popBackStack()
+                CartManager.limpiarCarrito()
+                Toast.makeText(requireContext(), "✅ Pedido realizado correctamente", Toast.LENGTH_LONG).show()
+
+                // Volver al catálogo limpiando todo el backstack
+                parentFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
             }
         }
 

@@ -7,14 +7,14 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.app.granineaapp.R
 
 class ProductoAdapter(
-    productos: List<Producto>,                  // ← acepta cualquier List (mutable o no)
+    productos: List<Producto>,
     private val onClick: (Producto) -> Unit
 ) : RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder>() {
 
-    // Copia interna mutable para poder actualizar
     private val productos: MutableList<Producto> = productos.toMutableList()
 
     inner class ProductoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,22 +35,26 @@ class ProductoAdapter(
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
         val producto = productos[position]
 
-        holder.imagen.setImageResource(producto.imagenRes)
+        // Lógica de Imagen: Prioriza recurso local, luego URL
+        if (producto.imagenRes != 0) {
+            holder.imagen.setImageResource(producto.imagenRes)
+        } else if (!producto.imagenUrl.isNullOrEmpty()) {
+            holder.imagen.load(producto.imagenUrl) {
+                crossfade(true)
+                placeholder(R.drawable.logo_graninea)
+                error(R.drawable.logo_graninea)
+            }
+        } else {
+            holder.imagen.setImageResource(R.drawable.logo_graninea) 
+        }
+
         holder.nombre.text = producto.nombre
-        holder.precio.text = "$${producto.precio.toInt()}"
+        holder.precio.text = "$${String.format("%,.0f", producto.precio)}"
 
         holder.itemView.setOnClickListener { onClick(producto) }
-
-        holder.btnAgregar.setOnClickListener {
-            // Reutiliza el mismo onClick para ir al detalle
-            onClick(producto)
-        }
+        holder.btnAgregar.setOnClickListener { onClick(producto) }
     }
 
-    /**
-     * Reemplaza la lista mostrada y notifica al RecyclerView.
-     * Llamado desde CatalogoFragment cuando cambia el filtro o el buscador.
-     */
     fun actualizarLista(nuevaLista: List<Producto>) {
         productos.clear()
         productos.addAll(nuevaLista)

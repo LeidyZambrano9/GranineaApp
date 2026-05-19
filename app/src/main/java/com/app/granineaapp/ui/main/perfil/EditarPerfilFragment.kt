@@ -2,9 +2,7 @@ package com.app.granineaapp.ui.main.perfil
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +24,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import android.Manifest
 import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.core.content.ContextCompat
 
 class EditarPerfilFragment : Fragment() {
@@ -34,21 +33,15 @@ class EditarPerfilFragment : Fragment() {
     private lateinit var ivEditarFoto: ImageView
     private lateinit var archivoFotoTemp: File
 
-    // Lanzador para solicitar el permiso de cámara
     private val lanzadorPermisoCamara =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { concedido ->
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { concedido ->
             if (concedido) {
                 abrirCamara()
             } else {
-                Toast.makeText(requireContext(),
-                    "Se necesita permiso de cámara para tomar fotos",
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Se necesita permiso de cámara para tomar fotos", Toast.LENGTH_SHORT).show()
             }
         }
 
-    // Lanzador para la cámara
     private val lanzadorCamara =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { exito ->
             if (exito) {
@@ -59,7 +52,6 @@ class EditarPerfilFragment : Fragment() {
             }
         }
 
-    // Lanzador para la galería
     private val lanzadorGaleria =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             if (uri != null) {
@@ -75,8 +67,7 @@ class EditarPerfilFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(
-            R.layout.fragment_editar_perfil, container, false)
+        return inflater.inflate(R.layout.fragment_editar_perfil, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,14 +83,13 @@ class EditarPerfilFragment : Fragment() {
         val etReContrasena = view.findViewById<EditText>(R.id.et_editar_recontrasena)
         val btnGuardar     = view.findViewById<Button>(R.id.btn_guardar_perfil)
 
-        // Cargar datos actuales en los campos
         lifecycleScope.launch {
             val usuario = UsuarioRepository.obtenerUsuarioActual()
             if (usuario != null) {
                 etNombres.setText(usuario.nombres)
                 etApellidos.setText(usuario.apellidos)
                 etCorreo.setText(usuario.correo ?: "")
-                etCelular.setText(usuario.celular ?: "") // ✅ CONFIGURADO: Ahora sí pinta el celular guardado al entrar
+                etCelular.setText(usuario.celular ?: "")
 
                 if (!usuario.foto_url.isNullOrEmpty()) {
                     ivEditarFoto.load(usuario.foto_url) {
@@ -111,17 +101,12 @@ class EditarPerfilFragment : Fragment() {
             }
         }
 
-        // Click en el ícono de cámara
         ivCamaraIcon.setOnClickListener {
             mostrarOpcionesFoto()
         }
 
-        // Guardar cambios con las nuevas validaciones
         btnGuardar.setOnClickListener {
-            guardarCambios(
-                etNombres, etApellidos, etCorreo, etCelular,
-                etContrasena, etReContrasena
-            )
+            guardarCambios(etNombres, etApellidos, etCorreo, etCelular, etContrasena, etReContrasena)
         }
     }
 
@@ -140,15 +125,10 @@ class EditarPerfilFragment : Fragment() {
 
     private fun verificarPermisoCamara() {
         when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.CAMERA
-            ) == PackageManager.PERMISSION_GRANTED -> {
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED -> {
                 abrirCamara()
             }
-            shouldShowRequestPermissionRationale(
-                Manifest.permission.CAMERA
-            ) -> {
+            shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> {
                 android.app.AlertDialog.Builder(requireContext())
                     .setTitle("Permiso de cámara")
                     .setMessage("Necesitamos acceso a la cámara para que puedas tomar tu foto de perfil.")
@@ -190,39 +170,27 @@ class EditarPerfilFragment : Fragment() {
         val correo       = etCorreo.text.toString().trim()
         val celular      = etCelular.text.toString().trim()
         val contrasena   = etContrasena.text.toString().trim()
-        val recontrasena = etReContrasena.text.toString().trim() // ✅ CORREGIDO: Todo en minúscula aquí
+        val recontrasena = etReContrasena.text.toString().trim()
 
-        // 🛑 VALIDACIÓN DE CAMPOS VACÍOS (Igual al registro)
         if (nombres.isEmpty() || apellidos.isEmpty() || correo.isEmpty() || celular.isEmpty() || contrasena.isEmpty() || recontrasena.isEmpty()) {
             Toast.makeText(requireContext(), "Por favor, llenar todos los campos", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // 🛑 VALIDACIÓN DEL FORMATO DE CORREO: Debe contener un @
         if (!correo.contains("@")) {
             Toast.makeText(requireContext(), "Por favor ingrese un correo válido (Debe contener '@')", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // 🛑 VALIDACIÓN ESTRICTA DE CELULAR: Exactamente 10 dígitos
         if (celular.length != 10) {
             Toast.makeText(requireContext(), "El número de celular debe tener exactamente 10 dígitos", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // 🛑 VALIDACIÓN DE CONTRASEÑA: Mínimo 8 caracteres (Igual al registro)
         if (contrasena.length < 8) {
             Toast.makeText(requireContext(), "La contraseña debe tener al menos 8 caracteres", Toast.LENGTH_SHORT).show()
             return
         }
-
-        // ✅ CORREGIDO: También usamos 'recontrasena' en minúscula aquí
-        if (contrasena != recontrasena) {
-            Toast.makeText(requireContext(), "Las contraseñas no coinciden, verifique nuevamente.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        // ... resto del código del lifecycleScope para guardar en Supabase
 
         if (contrasena != recontrasena) {
             Toast.makeText(requireContext(), "Las contraseñas no coinciden, verifique nuevamente.", Toast.LENGTH_SHORT).show()
@@ -231,17 +199,11 @@ class EditarPerfilFragment : Fragment() {
 
         lifecycleScope.launch {
             try {
-                // Subir foto si se seleccionó una nueva
                 var fotoUrl: String? = null
                 if (uriFotoSeleccionada != null) {
-                    fotoUrl = UsuarioRepository.subirFotoPerfil(
-                        requireContext(),
-                        uriFotoSeleccionada!!
-                    )
-                    android.util.Log.d("DEBUG_FOTO", "fotoUrl retornada: $fotoUrl")
+                    fotoUrl = UsuarioRepository.subirFotoPerfil(requireContext(), uriFotoSeleccionada!!)
                 }
 
-                // ✅ ACTUALIZADO: Ahora sí le enviamos el celular al repositorio modificado
                 UsuarioRepository.actualizarPerfil(
                     nombres   = nombres,
                     apellidos = apellidos,
@@ -250,23 +212,18 @@ class EditarPerfilFragment : Fragment() {
                     fotoUrl   = fotoUrl
                 )
 
-                // Actualizar contraseña en Supabase Auth
                 SupabaseClient.client.auth.updateUser {
                     password = contrasena
                 }
 
                 runOnUiThread {
-                    Toast.makeText(requireContext(),
-                        "Perfil actualizado correctamente",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Perfil actualizado correctamente", Toast.LENGTH_SHORT).show()
                     parentFragmentManager.popBackStack()
                 }
 
             } catch (e: Exception) {
                 runOnUiThread {
-                    Toast.makeText(requireContext(),
-                        "Error al guardar: ${e.message}",
-                        Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Error al guardar: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }

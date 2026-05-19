@@ -18,26 +18,24 @@ class PerfilFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //  CORREGIDO: Ahora inflama el XML correcto del menú (el de Goku y los botones)
         return inflater.inflate(R.layout.fragment_perfil, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Botón: Información Personal
+        // Botón: Información Personal -> Te redirige a la pantalla con los datos cargados
         val btnInformacionPersonal = view.findViewById<Button>(R.id.informacion_personal)
         btnInformacionPersonal?.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, InformacionPersonalFragment())
-                .addToBackStack(null)
+                .addToBackStack(null) // Permite retroceder a este menú con el botón atrás del móvil
                 .commit()
         }
 
         // Botón: Cambiar Contraseña
         val btnCambiarContrasena = view.findViewById<Button>(R.id.cambiar_contrasena)
         btnCambiarContrasena?.setOnClickListener {
-            // Nota: Descoméntalo si la clase 'fragment_cambiar_contrasena_1' ya existe en tu proyecto
             /*
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment_cambiar_contrasena_1())
@@ -74,7 +72,6 @@ class PerfilFragment : Fragment() {
     }
 
     companion object {
-        // ✅ CORREGIDO: Retorna correctamente una instancia de PerfilFragment
         @JvmStatic
         fun newInstance() = PerfilFragment()
     }

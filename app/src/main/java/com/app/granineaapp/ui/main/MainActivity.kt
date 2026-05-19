@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.app.granineaapp.R
 import com.app.granineaapp.SupabaseClient
 import com.app.granineaapp.ui.main.carrito.CarritoFragment
-import com.app.granineaapp.ui.main.perfil.EditarPerfilFragment
+import com.app.granineaapp.ui.main.perfil.PerfilFragment
 import com.app.granineaapp.ui.main.productos.CatalogoFragment
 import com.app.granineaapp.ui.inicio.HomeFragment
 import com.app.granineaapp.data.UsuarioRepository
@@ -54,13 +54,13 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        // Bottom Nav (Navegación de secciones - Cerrar sesión eliminado de aquí)
+        // Bottom Nav (Navegación de secciones)
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.inicio -> cargarFragment(HomeFragment())
                 R.id.catalogoProductos -> cargarFragment(CatalogoFragment())
                 R.id.carritoCompras -> cargarFragment(CarritoFragment())
-                R.id.miPerfil -> cargarFragment(EditarPerfilFragment())
+                R.id.miPerfil -> cargarFragment(PerfilFragment()) // ✅ CORREGIDO: Ahora carga PerfilFragment primero
             }
             true
         }
@@ -71,12 +71,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.inicio -> cargarFragment(HomeFragment())
                 R.id.catalogoProductos -> cargarFragment(CatalogoFragment())
                 R.id.carritoCompras -> cargarFragment(CarritoFragment())
-                R.id.miPerfil -> cargarFragment(EditarPerfilFragment())
+                R.id.miPerfil -> cargarFragment(PerfilFragment()) // ✅ CORREGIDO: Ahora carga PerfilFragment primero
                 R.id.nav_admin_home -> cargarFragment(AdminHomeFragment())
                 R.id.nav_pedidos -> cargarFragment(ListaPedidosFragment())
                 R.id.nav_productos -> cargarFragment(CatalogoAdminFragment())
                 R.id.nav_usuarios -> cargarFragment(ListaUsuariosFragment())
-                R.id.Cerrarsesion -> cerrarSesion() // Corregido: Coincide con el ID en menu_drawer.xml
+                R.id.Cerrarsesion -> cerrarSesion()
             }
             drawerLayout.closeDrawer(GravityCompat.START)
             true
@@ -92,7 +92,6 @@ class MainActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 android.util.Log.e("SESION", "Error al cerrar sesión: ${e.message}")
             } finally {
-                // Redirige al Login y limpia el historial de actividades para que no se pueda volver atrás
                 val intent = Intent(this@MainActivity, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
@@ -110,25 +109,20 @@ class MainActivity : AppCompatActivity() {
                 val esAdmin = rol == "admin"
                 val menu = navView.menu
 
-                // Bottom Nav solo para clientes
                 bottomNav.visibility = if (esAdmin) View.GONE else View.VISIBLE
 
-                // Drawer: opciones cliente
                 menu.findItem(R.id.inicio).isVisible = !esAdmin
                 menu.findItem(R.id.catalogoProductos).isVisible = !esAdmin
                 menu.findItem(R.id.carritoCompras).isVisible = !esAdmin
                 menu.findItem(R.id.miPerfil).isVisible = !esAdmin
-                
-                // Cerrar sesión visible para todos en el menú lateral
+
                 menu.findItem(R.id.Cerrarsesion).isVisible = true
 
-                // Drawer: opciones admin
                 menu.findItem(R.id.nav_admin_home).isVisible = esAdmin
                 menu.findItem(R.id.nav_pedidos).isVisible = esAdmin
                 menu.findItem(R.id.nav_productos).isVisible = esAdmin
                 menu.findItem(R.id.nav_usuarios).isVisible = esAdmin
 
-                // Fragment inicial
                 if (savedInstanceState == null) {
                     if (esAdmin) {
                         cargarFragment(AdminHomeFragment())

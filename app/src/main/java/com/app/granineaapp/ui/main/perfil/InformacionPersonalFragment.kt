@@ -17,40 +17,38 @@ import com.app.granineaapp.R
 import com.app.granineaapp.data.UsuarioRepository
 import kotlinx.coroutines.launch
 
-class InformacionPersonalFragment: Fragment() {
+class InformacionPersonalFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Asegúrate de que el nombre del archivo XML sea fragment_perfil.xml
         return inflater.inflate(R.layout.fragment_informacion_personal, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Vinculación con los IDs corregidos de tu XML
-        val ivFoto     = view.findViewById<ImageView>(R.id.iv_perfil_foto)
-        val etNombres  = view.findViewById<EditText>(R.id.et_ver_nombres)
+        val ivFoto      = view.findViewById<ImageView>(R.id.iv_perfil_foto)
+        val etNombres   = view.findViewById<EditText>(R.id.et_ver_nombres)
         val etApellidos = view.findViewById<EditText>(R.id.et_ver_apellidos)
-        val etCorreo   = view.findViewById<EditText>(R.id.et_ver_correo)
-        val btnEditar  = view.findViewById<Button>(R.id.btn_ir_editar_perfil)
+        val etCorreo    = view.findViewById<EditText>(R.id.et_ver_correo)
+        val etCelular   = view.findViewById<EditText>(R.id.et_ver_celular)
+        val btnEditar   = view.findViewById<Button>(R.id.btn_ir_editar_perfil)
 
-        // Cargar datos del usuario desde Supabase
-        lifecycleScope.launch {
+        // Carga de datos asíncrona controlando nulos de Supabase
+        viewLifecycleOwner.lifecycleScope.launch {
             try {
                 val usuario = UsuarioRepository.obtenerUsuarioActual()
                 android.util.Log.d("DEBUG_PERFIL", "foto_url: ${usuario?.foto_url}")
 
                 if (usuario != null) {
-                    // Usamos .setText() porque en el XML son EditText
-                    etNombres.setText(usuario.nombres)
-                    etApellidos.setText(usuario.apellidos)
-                    etCorreo.setText(usuario.correo ?: "")
+                    etNombres?.setText(usuario.nombres ?: "")
+                    etApellidos?.setText(usuario.apellidos ?: "")
+                    etCorreo?.setText(usuario.correo ?: "")
+                    etCelular?.setText(usuario.celular ?: "") // Muestra el celular configurado
 
-                    // Cargar foto con Coil si existe URL
                     if (!usuario.foto_url.isNullOrEmpty()) {
                         val urlConTimestamp = "${usuario.foto_url}?t=${System.currentTimeMillis()}"
 
@@ -63,17 +61,16 @@ class InformacionPersonalFragment: Fragment() {
                         }
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Error al cargar perfil", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "No se encontraron datos del usuario", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
-                android.util.Log.e("ERROR_PERFIL", "Error: ${e.message}")
-                Toast.makeText(requireContext(), "Error de conexión", Toast.LENGTH_SHORT).show()
+                android.util.Log.e("ERROR_PERFIL", "Error: ${e.message}", e)
+                Toast.makeText(requireContext(), "Error de conexión al cargar datos", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Navegación a la pantalla de edición
-        btnEditar.setOnClickListener {
-            // Usamos 'fragment_container' que es el contenedor real de tu activity_main.xml
+        // Navegación a la pantalla de Edición
+        btnEditar?.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, EditarPerfilFragment())
                 .addToBackStack(null)

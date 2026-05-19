@@ -135,4 +135,11 @@
     <string name="imagen_del_producto_edit_admin">Imagen del Producto</string>
     <string name="cambiar_imagen_edit_admin">📷 CAMBIAR IMAGEN</string>
     <string name="guardar_cambios_edit_admin">GUARDAR CAMBIOS</string>
+    <string name="editar_usuario">Editar usuario</string>
+    <string name="nombresl">Nombres *</string>
+    <string name="ej_juan">Ej: Juan</string>
+    <string name="apellidosl">Apellidos *</string>
+    <string name="ej_p_rez">Ej: Pérez</string>
+    <string name="correo_electr_nico">Correo electrónico *</string>
+    <string name="ejemplo_correo_com">ejemplo@correo.com</string>
 </resources>

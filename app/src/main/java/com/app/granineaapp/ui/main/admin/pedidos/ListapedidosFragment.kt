@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.granineaapp.R
 import com.app.granineaapp.adapter.PedidoAdapter
-import com.app.granineaapp.data.FakeData
 import com.app.granineaapp.model.Pedido
 
 class ListaPedidosFragment : Fragment() {

@@ -155,4 +155,11 @@
     <string name="contrase_a">CONTRASEÑA</string>
     <string name="repetir_contraseña">REPETIR CONTRASEÑA</string>
     <string name="contraseña">CONTRASEÑA</string>
+    <string name="editar_usuario">Editar usuario</string>
+    <string name="nombresl">Nombres *</string>
+    <string name="ej_juan">Ej: Juan</string>
+    <string name="apellidosl">Apellidos *</string>
+    <string name="ej_p_rez">Ej: Pérez</string>
+    <string name="correo_electr_nico">Correo electrónico *</string>
+    <string name="ejemplo_correo_com">ejemplo@correo.com</string>
 </resources>

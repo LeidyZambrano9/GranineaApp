@@ -12,7 +12,7 @@
         android:id="@+id/tvTituloEditarUsuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Editar usuario"
+        android:text="@string/editar_usuario"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/white"
@@ -22,12 +22,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Nombre y Apellido -->
+    <!-- Nombres -->
     <TextView
         android:id="@+id/labelNombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Nombre y apellido *"
+        android:text="@string/nombresl"
         android:textSize="14sp"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/tvTituloEditarUsuario"
@@ -37,7 +37,7 @@
         android:id="@+id/etUsuarioNombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Ej: Juan Pérez"
+        android:hint="@string/ej_juan"
         android:inputType="textPersonName"
         android:backgroundTint="@color/white"
         android:textColor="@color/white"
@@ -46,12 +46,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Correo Electrónico -->
+    <!-- Apellidos -->
     <TextView
-        android:id="@+id/labelCorreo"
+        android:id="@+id/labelApellido"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Correo electrónico *"
+        android:text="@string/apellidosl"
         android:textSize="14sp"
         android:textColor="@color/white"
         android:layout_marginTop="16dp"
@@ -59,10 +59,35 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
+        android:id="@+id/etUsuarioApellido"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/ej_p_rez"
+        android:inputType="textPersonName"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/labelApellido"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Correo Electrónico -->
+    <TextView
+        android:id="@+id/labelCorreo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/correo_electr_nico"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/etUsuarioApellido"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
         android:id="@+id/etUsuarioCorreo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="ejemplo@correo.com"
+        android:hint="@string/ejemplo_correo_com"
         android:inputType="textEmailAddress"
         android:backgroundTint="@color/white"
         android:textColor="@color/white"
@@ -96,7 +121,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Rol (Spinner) -->
+    <!-- Rol -->
     <TextView
         android:id="@+id/labelRol"
         android:layout_width="0dp"
@@ -118,7 +143,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botones de Acción -->
+    <!-- Botones -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"

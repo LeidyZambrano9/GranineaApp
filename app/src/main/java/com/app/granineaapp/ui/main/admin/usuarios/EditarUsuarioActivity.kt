@@ -4,27 +4,30 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.app.granineaapp.R
-import com.app.granineaapp.data.FakeData
-import com.app.granineaapp.model.Rol
+import com.app.granineaapp.data.UsuarioRepository
+import kotlinx.coroutines.launch
 
 class EditarUsuarioActivity : AppCompatActivity() {
 
     private lateinit var etNombre: EditText
+    private lateinit var etApellido: EditText
     private lateinit var etCorreo: EditText
     private lateinit var etCelular: EditText
     private lateinit var spinnerRol: Spinner
-    private var usuarioId: Int = -1
+    private var usuarioId: String = ""
     private var soloLectura: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editar_usuario)
 
-        usuarioId = intent.getIntExtra("usuario_id", -1)
+        usuarioId = intent.getStringExtra("usuario_id") ?: ""
         soloLectura = intent.getBooleanExtra("solo_lectura", false)
 
         etNombre = findViewById(R.id.etUsuarioNombre)
+        etApellido = findViewById(R.id.etUsuarioApellido)
         etCorreo = findViewById(R.id.etUsuarioCorreo)
         etCelular = findViewById(R.id.etUsuarioCelular)
         spinnerRol = findViewById(R.id.spinnerUsuarioRol)
@@ -34,6 +37,7 @@ class EditarUsuarioActivity : AppCompatActivity() {
 
         if (soloLectura) {
             etNombre.isEnabled = false
+            etApellido.isEnabled = false
             etCorreo.isEnabled = false
             etCelular.isEnabled = false
             spinnerRol.isEnabled = false
@@ -46,41 +50,63 @@ class EditarUsuarioActivity : AppCompatActivity() {
     }
 
     private fun configurarSpinnerRol() {
-        // El usuario va a tener un rol que definirá sus permisos en la app.
-        // Roles disponibles: Cliente, Trabajador
-        val roles = listOf("CLIENTE", "TRABAJADOR")
-        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, roles)
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerRol.adapter = spinnerAdapter
+        val roles = listOf("cliente", "admin")
+        val adapter = object : ArrayAdapter<String>(
+            this,
+            android.R.layout.simple_spinner_item,
+            roles
+        ) {
+            override fun getView(position: Int, convertView: View?, parent: android.view.ViewGroup): View {
+                val view = super.getView(position, convertView, parent)
+                view.findViewById<TextView>(android.R.id.text1)
+                    .setTextColor(resources.getColor(android.R.color.white))
+                return view
+            }
+        }
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerRol.adapter = adapter
     }
 
     private fun cargarDatos() {
-        val usuario = FakeData.usuarios.find { it.id == usuarioId } ?: return
-        etNombre.setText(usuario.nombreApellido)
-        etCorreo.setText(usuario.correo)
-        etCelular.setText(usuario.celular)
-        val rolIndex = if (usuario.rol == Rol.TRABAJADOR) 1 else 0
-        spinnerRol.setSelection(rolIndex)
+        lifecycleScope.launch {
+            val usuario = UsuarioRepository.obtenerUsuarioPorId(usuarioId) ?: return@launch
+            runOnUiThread {
+                etNombre.setText(usuario.nombres)
+                etApellido.setText(usuario.apellidos)
+                etCorreo.setText(usuario.correo ?: "")
+                etCelular.setText(usuario.celular ?: "")
+                val roles = listOf("cliente", "admin")
+                spinnerRol.setSelection(roles.indexOf(usuario.rol).coerceAtLeast(0))
+            }
+        }
     }
 
     private fun guardarCambios() {
-        val nombre = etNombre.text.toString().trim()
+        val nombres = etNombre.text.toString().trim()
+        val apellidos = etApellido.text.toString().trim()
         val correo = etCorreo.text.toString().trim()
         val celular = etCelular.text.toString().trim()
 
-        if (nombre.isBlank() || correo.isBlank() || celular.isBlank()) {
+        if (nombres.isBlank() || apellidos.isBlank() || correo.isBlank()) {
             Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
             return
         }
 
-        val nuevoRol = if (spinnerRol.selectedItemPosition == 1) Rol.TRABAJADOR else Rol.CLIENTE
-        val index = FakeData.usuarios.indexOfFirst { it.id == usuarioId }
+        val nuevoRol = spinnerRol.selectedItem.toString()
 
-        if (index != -1) {
-            // FakeData.usuarios es val List, debería ser MutableList para editar.
-            // En producción se actualizará en la base de datos.
-            Toast.makeText(this, "Usuario actualizado correctamente", Toast.LENGTH_SHORT).show()
-            finish()
+        lifecycleScope.launch {
+            UsuarioRepository.actualizarUsuarioPorAdmin(
+                id = usuarioId,
+                nombres = nombres,
+                apellidos = apellidos,
+                correo = correo,
+                celular = celular,
+                rol = nuevoRol
+            )
+            runOnUiThread {
+                Toast.makeText(this@EditarUsuarioActivity, "Usuario actualizado", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
 }

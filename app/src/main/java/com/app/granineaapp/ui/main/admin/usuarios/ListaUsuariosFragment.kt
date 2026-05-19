@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.granineaapp.R
 import com.app.granineaapp.adapter.UsuarioAdapter
-import com.app.granineaapp.data.FakeData
+import com.app.granineaapp.data.UsuarioRepository
 import com.app.granineaapp.model.Usuario
+import kotlinx.coroutines.launch
 
 class ListaUsuariosFragment : Fragment() {
 
@@ -24,18 +26,34 @@ class ListaUsuariosFragment : Fragment() {
     ): View = inflater.inflate(R.layout.fragment_lista_usuarios, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        rvUsuarios = view.findViewById(R.id.rvUsuarios)
+        super.onViewCreated(view, savedInstanceState)
 
-        adapter = UsuarioAdapter(
-            usuarios = FakeData.usuarios,
-            onVerInfo = { usuario -> abrirInfoUsuario(usuario) },
-            onEditar = { usuario -> editarUsuario(usuario) }
-        )
+        rvUsuarios = view.findViewById(R.id.rvUsuarios)
         rvUsuarios.layoutManager = LinearLayoutManager(requireContext())
-        rvUsuarios.adapter = adapter
 
         view.findViewById<View>(R.id.btnVolverUsuarios).setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
+        cargarUsuarios()
+    }
+
+    // ✅ Se recarga cada vez que vuelves de EditarUsuarioActivity
+    override fun onResume() {
+        super.onResume()
+        cargarUsuarios()
+    }
+
+    private fun cargarUsuarios() {
+        lifecycleScope.launch {
+            val usuarios = UsuarioRepository.obtenerTodosLosUsuarios()
+
+            adapter = UsuarioAdapter(
+                usuarios = usuarios,
+                onVerInfo = { usuario -> abrirInfoUsuario(usuario) },
+                onEditar = { usuario -> editarUsuario(usuario) }
+            )
+            rvUsuarios.adapter = adapter
         }
     }
 

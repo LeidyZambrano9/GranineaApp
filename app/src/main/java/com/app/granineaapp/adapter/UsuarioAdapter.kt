@@ -17,6 +17,9 @@ class UsuarioAdapter(
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvTitulo: TextView = view.findViewById(R.id.tvUsuarioTitulo)
         val tvInfo: TextView = view.findViewById(R.id.tvUsuarioInfo)
+        val tvRol: TextView = view.findViewById(R.id.tvUsuarioRol)
+        val tvEmail: TextView = view.findViewById(R.id.tvUsuarioEmail)
+        val tvTelefono: TextView = view.findViewById(R.id.tvUsuarioTelefono)
         val btnInfo: View = view.findViewById(R.id.btnVerInfoUsuario)
         val btnEditar: View? = view.findViewById(R.id.btnEditarUsuario)
     }
@@ -29,8 +32,13 @@ class UsuarioAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val usuario = usuarios[position]
-        holder.tvTitulo.text = "Usuario #${usuario.id}"
-        holder.tvInfo.text = "Información del usuario"
+
+        holder.tvTitulo.text = "${usuario.nombres} ${usuario.apellidos}"
+        holder.tvInfo.text = "${usuario.correo ?: "Sin correo"} · ${usuario.rol}"
+        holder.tvRol.text = usuario.rol.uppercase()
+        holder.tvEmail.text = usuario.correo ?: "Sin correo"
+        holder.tvTelefono.text = usuario.celular ?: "Sin teléfono"
+
         holder.btnInfo.setOnClickListener { onVerInfo(usuario) }
         holder.btnEditar?.setOnClickListener { onEditar?.invoke(usuario) }
     }

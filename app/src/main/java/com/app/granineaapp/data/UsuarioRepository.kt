@@ -1,6 +1,7 @@
 package com.app.granineaapp.data
 
 import com.app.granineaapp.SupabaseClient
+import com.app.granineaapp.model.Usuario
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Columns
@@ -153,5 +154,55 @@ object UsuarioRepository {
         android.util.Log.d("DEBUG_FOTO", "URL generada: $url")
 
         return url
+    }
+    suspend fun obtenerTodosLosUsuarios(): List<Usuario> {
+        return try {
+            SupabaseClient.client
+                .postgrest["Usuarios"]
+                .select()
+                .decodeList<Usuario>()
+        } catch (e: Exception) {
+            android.util.Log.e("DEBUG_USUARIOS", "Error: ${e.message}")
+            emptyList()
+        }
+    }
+    suspend fun obtenerUsuarioPorId(id: String): UsuarioData? {
+        return try {
+            val resultado = SupabaseClient.client
+                .postgrest["Usuarios"]
+                .select {
+                    filter { eq("id", id) }
+                }
+                .decodeList<UsuarioData>()
+            resultado.firstOrNull()
+        } catch (e: Exception) {
+            android.util.Log.e("DEBUG_USUARIOS", "Error: ${e.message}")
+            null
+        }
+    }
+
+    suspend fun actualizarUsuarioPorAdmin(
+        id: String,
+        nombres: String,
+        apellidos: String,
+        correo: String,
+        celular: String,
+        rol: String
+    ) {
+        try {
+            val datos = buildJsonObject {
+                put("nombres", nombres)
+                put("apellidos", apellidos)
+                put("correo", correo)
+                put("celular", celular)
+                put("rol", rol)
+            }
+            SupabaseClient.client.postgrest["Usuarios"]
+                .update(datos) {
+                    filter { eq("id", id) }
+                }
+        } catch (e: Exception) {
+            android.util.Log.e("DEBUG_USUARIOS", "Error al actualizar: ${e.message}")
+        }
     }
 }

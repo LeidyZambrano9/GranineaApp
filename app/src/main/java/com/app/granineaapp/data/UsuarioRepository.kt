@@ -8,14 +8,16 @@ import kotlinx.serialization.Serializable
 import io.github.jan.supabase.storage.storage
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
+
 object UsuarioRepository {
+
     @Serializable
     data class UsuarioData(
         val id: String,
         val created_at: String? = null,  // Agregado - timestamptz
         val nombres: String,
         val apellidos: String,
-        val celular: String? = null,      // Agregado - text
+        val celular: String? = null, // ✅ AGREGADO: Para mapear el celular desde Supabase
         val correo: String? = null,
         val rol: String = "cliente",
         val foto_url: String? = null
@@ -57,21 +59,10 @@ object UsuarioRepository {
         }
     }
 
-    suspend fun insertarUsuario(
-        id: String,
-        nombres: String,
-        apellidos: String,
-        celular: String? = null,  // Nuevo parámetro
-        correo: String
-    ) {
+    // Nota: Si usas esta función en el Registro antiguo, recuerda añadirle el parámetro celular si lo requieres allí.
+    suspend fun insertarUsuario(id: String, nombres: String, apellidos: String, correo: String) {
         SupabaseClient.client.postgrest["Usuarios"].insert(
-            UsuarioData(
-                id = id,
-                nombres = nombres,
-                apellidos = apellidos,
-                celular = celular,
-                correo = correo
-            )
+            UsuarioData(id = id, nombres = nombres, apellidos = apellidos, correo = correo)
         )
     }
 

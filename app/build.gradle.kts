@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId = "com.app.granineaapp"
         minSdk = 31
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -58,5 +58,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.supabase.storage)
+
+
 
 }

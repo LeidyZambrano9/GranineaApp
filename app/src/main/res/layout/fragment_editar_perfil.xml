@@ -1,86 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_fondo">
 
     <LinearLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="20dp">
+        android:padding="20dp"
+        tools:context="com.app.granineaapp.ui.inicio.HomeActivity">
 
+        <TextView
+            android:id="@+id/EditarPerfil_Titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/tirodevanagarisanskrititalic"
+            android:text="@string/editar_perfil"
+            android:gravity="center"
+            android:textColor="@color/colorverde_letra"
+            android:textSize="35sp" />
 
-
-        <!-- FOTO PERFIL -->
-        <ImageView
-            android:id="@+id/img_perfil"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/goku"
-            android:scaleType="centerCrop"
-            android:layout_marginBottom="10dp"
-            android:outlineProvider="background"
-            android:clipToOutline="true"
-            android:background="@drawable/bg_circle"/>
-
-        <!-- INFORMACION PERSONAL -->
-        <Button
-            android:id="@+id/informacion_personal"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/informacion_personal"
-            android:textStyle="bold"
-            android:backgroundTint="@color/colorverde_letra"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="10dp"/>
+            android:layout_height="wrap_content">
 
-        <!-- CAMBIAR CONTRASEÑA -->
-        <Button
-            android:id="@+id/cambiar_contrasena"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/cambiar_contra"
-            android:textStyle="bold"
-            android:backgroundTint="@color/colorverde_letra"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="10dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingBottom="30dp">
 
-        <!-- HISTORIAL DE COMPRAS -->
-        <Button
-            android:id="@+id/historial_compras"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/historial_de_compras"
-            android:textStyle="bold"
-            android:backgroundTint="@color/colorverde_letra"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="10dp"/>
+                <FrameLayout
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="24dp">
 
-        <!-- VOLVER -->
-        <Button
-            android:id="@+id/btn_volver"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/volver"
-            android:textStyle="bold"
-            android:backgroundTint="@color/colorverde_letra"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="10dp"/>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="60dp"
+                        app:cardElevation="6dp">
 
-        <!-- CERRAR SESION (ROJO) -->
-        <Button
-            android:id="@+id/cerrar_sesion"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/cerrar_sesi_n"
-            android:textStyle="bold"
-            android:backgroundTint="@color/red"
-            android:textColor="@android:color/white"
-            android:layout_marginBottom="10dp"/>
+                        <ImageView
+                            android:id="@+id/iv_editar_foto"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/ic_launcher_round"
+                            android:contentDescription="@string/foto_de_perfil" />
+                    </androidx.cardview.widget.CardView>
 
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:cardCornerRadius="22.5dp"
+                        app:cardElevation="8dp">
 
+                        <ImageView
+                            android:id="@+id/iv_camara_icon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_launcher_cameraeditar_foreground"
+                            app:tint="@color/black"
+                            android:contentDescription="@string/cambiar_foto" />
+                    </androidx.cardview.widget.CardView>
+
+                </FrameLayout>
+
+                <EditText
+                    android:id="@+id/et_editar_nombres"
+                    android:layout_width="340dp"
+                    android:layout_height="55dp"
+                    android:background="@drawable/imagen_campo_formulario"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical|start"
+                    android:hint="@string/nombres_informacion_personal"
+                    android:inputType="textPersonName"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@color/colornegro_letra"
+                    android:textColorHint="#808080"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_editar_apellidos"
+                    android:layout_width="340dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/imagen_campo_formulario"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical|start"
+                    android:hint="@string/apellidos_informacion_personal"
+                    android:inputType="textPersonName"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@color/colornegro_letra"
+                    android:textColorHint="#808080"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_editar_correo"
+                    android:layout_width="340dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/imagen_campo_formulario"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical|start"
+                    android:hint="@string/Correo_informacion_personal"
+                    android:inputType="textEmailAddress"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@color/colornegro_letra"
+                    android:textColorHint="#808080"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_editar_celular"
+                    android:layout_width="340dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/imagen_campo_formulario"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical|start"
+                    android:hint="@string/numero_celular_informacion_personal"
+                    android:inputType="phone"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@color/colornegro_letra"
+                    android:textColorHint="#808080"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_editar_contrasena"
+                    android:layout_width="340dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/imagen_campo_formulario"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical|start"
+                    android:hint="@string/contraseña"
+                    android:inputType="textPassword"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@color/colornegro_letra"
+                    android:textColorHint="#808080"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/et_editar_recontrasena"
+                    android:layout_width="340dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/imagen_campo_formulario"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical|start"
+                    android:hint="@string/repetir_contraseña"
+                    android:inputType="textPassword"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:textColor="@color/colornegro_letra"
+                    android:textColorHint="#808080"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/btn_guardar_perfil"
+                    android:layout_width="340dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="25dp"
+                    android:backgroundTint="@color/colorverde_letra"
+                    android:text="@string/guardar_cambios"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="12dp" />
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
 

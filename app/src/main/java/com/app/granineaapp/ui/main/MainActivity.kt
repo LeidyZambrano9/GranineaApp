@@ -19,7 +19,7 @@ import com.app.granineaapp.ui.inicio.HomeFragment
 import com.app.granineaapp.data.UsuarioRepository
 // Importa tus fragments de admin
 import com.app.granineaapp.ui.main.admin.pedidos.ListaPedidosFragment
-import com.app.granineaapp.ui.main.admin.AdminActivity
+import com.app.granineaapp.ui.main.admin.AdminHomeFragment
 import com.app.granineaapp.ui.main.admin.usuarios.ListaUsuariosFragment
 import com.app.granineaapp.ui.main.admin.productos.CatalogoAdminFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.catalogoProductos -> cargarFragment(CatalogoFragment())
                 R.id.carritoCompras -> cargarFragment(CarritoFragment())
                 R.id.miPerfil -> cargarFragment(EditarPerfilFragment())
-                R.id.nav_admin_home -> cargarFragment(HomeFragment())
+                R.id.nav_admin_home -> cargarFragment(AdminHomeFragment())
                 R.id.nav_pedidos -> cargarFragment(ListaPedidosFragment())
                 R.id.nav_productos -> cargarFragment(CatalogoAdminFragment())
                 R.id.nav_usuarios -> cargarFragment(ListaUsuariosFragment())
@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                 // ✅ Estado inicial según rol, solo la primera vez
                 if (savedInstanceState == null) {
                     if (esAdmin) {
-                        cargarFragment(HomeFragment()) // o tu AdminHomeFragment
+                        cargarFragment(AdminHomeFragment())
                     } else {
                         cargarFragment(HomeFragment())
                         bottomNav.selectedItemId = R.id.inicio

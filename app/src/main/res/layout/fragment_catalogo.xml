@@ -5,17 +5,7 @@
     android:orientation="vertical"
     android:background="@color/color_fondo">
 
-    <!-- LOGO -->
-    <ImageView
-        android:id="@+id/logo_catalogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/logo_graninea"
-        android:scaleType="fitCenter"
-        android:maxHeight="100dp"
-        android:adjustViewBounds="true"/>
+
 
     <!-- BUSCADOR -->
     <LinearLayout

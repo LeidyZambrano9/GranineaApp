@@ -1,23 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/inicio"
-        android:title="@string/home"
-        android:icon="@android:drawable/ic_menu_today"
-        />
 
-    <item
-        android:id="@+id/catalogoProductos"
-        android:title="@string/catalogom"
-        android:icon="@android:drawable/alert_dark_frame" />
-    <item
-        android:id="@+id/carritoCompras"
-        android:title="@string/carrito_de_compras"
-        android:icon="@android:drawable/btn_star_big_on" />
-    <item
-        android:id="@+id/miPerfil"
-        android:title="@string/mi_perfil"
-        android:icon="@android:drawable/bottom_bar" />
+    <!-- Opciones cliente, visibles por defecto -->
+    <group android:id="@+id/grupo_cliente">
+        <item
+            android:id="@+id/inicio"
+            android:title="@string/home"
+            android:icon="@android:drawable/ic_menu_today" />
+        <item
+            android:id="@+id/catalogoProductos"
+            android:title="@string/catalogom"
+            android:icon="@android:drawable/alert_dark_frame" />
+        <item
+            android:id="@+id/carritoCompras"
+            android:title="@string/carrito_de_compras"
+            android:icon="@android:drawable/btn_star_big_on" />
+        <item
+            android:id="@+id/miPerfil"
+            android:title="@string/mi_perfil"
+            android:icon="@android:drawable/bottom_bar" />
+    </group>
 
+    <!-- Opciones admin, ocultas por defecto -->
+    <group android:id="@+id/grupo_admin">
+        <item
+            android:id="@+id/nav_admin_home"
+            android:icon="@android:drawable/ic_menu_day"
+            android:title="🔐 Home Admin"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_pedidos"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="🔐 Pedidos"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_productos"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="🔐 Productos"
+            android:visible="false" />
+        <item
+            android:id="@+id/nav_usuarios"
+            android:icon="@android:drawable/menu_frame"
+            android:title="🔐 Usuarios"
+            android:visible="false" />
+    </group>
 
 </menu>

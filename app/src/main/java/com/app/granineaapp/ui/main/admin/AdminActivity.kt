@@ -24,7 +24,7 @@ import com.google.android.material.navigation.NavigationView
 import com.app.granineaapp.ui.main.admin.productos.CatalogoAdminFragment
 import com.app.granineaapp.ui.main.perfil.EditarPerfilFragment
 
-class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class AdminActivity : AppCompatActivity() {
 
     // ==================== VIEWS PRINCIPALES ====================
     private lateinit var tvUsuariosCount: TextView
@@ -46,11 +46,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
 
-        // Configurar Toolbar como ActionBar
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbarAdmin)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+
 
         // Inicializar Views principales
         tvUsuariosCount = findViewById(R.id.tvAdminUsuariosCount)
@@ -64,32 +60,18 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         configurarDrawer()
 
 
-        configurarBotones()
-        cargarInfoAdminEnHeader()
+
+
     }
 
 
 
-    // ==================== CONFIGURACIÓN DE BOTONES PRINCIPALES ====================
-    private fun configurarBotones() {
-        findViewById<View>(R.id.btnAdminGestionarProductos).setOnClickListener {
-            cargarFragment(CatalogoAdminFragment(), "Catálogo - Admin")  // ✅ Nuevo fragment admin
-        }
-        findViewById<View>(R.id.btnAdminGestionarPedidos).setOnClickListener {
-            cargarFragment(ListaPedidosFragment(), "Pedidos")
-        }
-        findViewById<View>(R.id.btnAdminGestionarUsuarios).setOnClickListener {
-            cargarFragment(ListaUsuariosFragment(), "Usuarios")
-        }
-        findViewById<View>(R.id.btnAdminMostrarTodos).setOnClickListener {
-            cargarFragment(ListaPedidosFragment(), "Todos los pedidos")
-        }
-    }
+
 
     // ==================== CONFIGURACIÓN DEL NAVIGATION DRAWER ====================
     private fun configurarDrawer() {
         drawerLayout = findViewById(R.id.drawerLayout)
-        navigationView = findViewById(R.id.navigationView)
+
 
         // Toggle hamburguesa
         toggle = ActionBarDrawerToggle(
@@ -101,8 +83,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        // Listener del menú lateral
-        navigationView.setNavigationItemSelectedListener(this)
+
     }
 
     // ==================== MÉTODO PARA CARGAR FRAGMENTS ====================
@@ -136,28 +117,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
     }
 
-    // ==================== NAVEGACIÓN DEL MENÚ LATERAL ====================
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_home -> {
-                volverAlHome()
-                drawerLayout.closeDrawer(GravityCompat.START)  //
-            }
-            R.id.nav_pedidos -> {
-                cargarFragment(ListaPedidosFragment(), "Pedidos")
-            }
-            R.id.nav_productos -> {
-                cargarFragment(CatalogoAdminFragment(), "Catálogo - Admin")  // ✅ Nuevo fragment admin
-            }
-            R.id.nav_usuarios -> {
-                cargarFragment(ListaUsuariosFragment(), "Usuarios")
-            }
-            R.id.nav_perfil -> {
-                cargarFragment(EditarPerfilFragment(), "Mi Perfil")
-            }
-        }
-        return true
-    }
+
 
     // ==================== DETALLE DE PEDIDO (Activity separada) ====================
     private fun abrirDetallePedido(pedido: Pedido) {
@@ -171,18 +131,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         }
     }
 
-    // ==================== MARCAR PEDIDO COMO ENTREGADO ====================
 
-
-    // ==================== CARGAR INFO DEL ADMIN EN EL HEADER ====================
-    private fun cargarInfoAdminEnHeader() {
-        val headerView = navigationView.getHeaderView(0)
-        val tvAdminName = headerView.findViewById<TextView>(R.id.tvAdminName)
-        val tvAdminEmail = headerView.findViewById<TextView>(R.id.tvAdminEmail)
-
-        tvAdminName.text = "Administrador"
-        tvAdminEmail.text = "admin@graninea.com"
-    }
 
     // ==================== MANEJO DEL BOTÓN DE ATRÁS Y HAMBURGUESA ====================
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

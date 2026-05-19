@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <include layout="@layout/toolbar_admin" />
+             />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -228,16 +228,6 @@
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <!-- Navigation Drawer -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/black"
-        app:headerLayout="@layout/nav_header_admin"
-        app:menu="@menu/menu_lateral_admin"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

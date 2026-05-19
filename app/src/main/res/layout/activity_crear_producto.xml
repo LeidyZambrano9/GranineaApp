@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NUEVO PRODUCTO"
+            android:text="@string/nuevo_producto"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/colorverde_letra"
@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre del Producto *"
+            android:text="@string/nombre_del_producto"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
@@ -33,7 +33,7 @@
             android:id="@+id/etCrearNombre"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Ej: Granizado de Fresa"
+            android:hint="@string/crear_producto"
             android:textColor="@color/white"
             android:textColorHint="#888888"
             android:backgroundTint="@color/colorverde_letra"
@@ -44,7 +44,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripción"
+            android:text="@string/descripcion"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
@@ -52,7 +52,7 @@
             android:id="@+id/etCrearDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Breve descripción del sabor..."
+            android:hint="@string/descripcion_producto_admin"
             android:textColor="@color/white"
             android:textColorHint="#888888"
             android:backgroundTint="@color/colorverde_letra"
@@ -77,14 +77,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Precio ($) *"
+                    android:text="@string/precio_producto_admin"
                     android:textColor="@color/white" />
 
                 <EditText
                     android:id="@+id/etCrearPrecio"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:hint="0.00"
+                    android:hint="@string/precio_total_producto_admin"
                     android:textColor="@color/white"
                     android:textColorHint="#888888"
                     android:backgroundTint="@color/colorverde_letra"
@@ -101,7 +101,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Categoría *"
+                    android:text="@string/categoria_producto_admin"
                     android:textColor="@color/white" />
 
                 <Spinner
@@ -113,11 +113,31 @@
             </LinearLayout>
         </LinearLayout>
 
+
+        <!-- Sabores -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sabores_productos_admin"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/etCrearSabores"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_sabores_admin"
+            android:textColor="@color/white"
+            android:textColorHint="#888888"
+            android:backgroundTint="@color/colorverde_letra"
+            android:inputType="text"
+            android:layout_marginBottom="16dp"/>
         <!-- ── SECCIÓN IMAGEN ────────────────────────────────────────────── -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Imagen del Producto"
+            android:text="@string/imagen_producto"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:layout_marginTop="16dp" />
@@ -143,32 +163,13 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="8dp" />
 
-        <!-- Sabores -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sabores (separados por coma)"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_marginTop="16dp"/>
-
-        <EditText
-            android:id="@+id/etCrearSabores"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Ej: fresa, mango, uva"
-            android:textColor="@color/white"
-            android:textColorHint="#888888"
-            android:backgroundTint="@color/colorverde_letra"
-            android:inputType="text"
-            android:layout_marginBottom="16dp"/>
 
         <!-- Botón para abrir galería -->
         <Button
             android:id="@+id/btnSeleccionarImagen"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="📷  SELECCIONAR IMAGEN"
+            android:text="@string/seleccionar_imagen_text"
             android:backgroundTint="#1A1A1A"
             android:textColor="@color/colorverde_letra"
             android:layout_marginBottom="24dp" />
@@ -187,7 +188,7 @@
             android:id="@+id/btnGuardarProducto"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="CREAR PRODUCTO"
+            android:text="@string/crear_producto_btn"
             android:textStyle="bold"
             android:backgroundTint="@color/colorverde_letra"
             android:textColor="@color/black"

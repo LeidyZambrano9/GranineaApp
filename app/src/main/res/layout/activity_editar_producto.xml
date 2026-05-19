@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="EDITAR PRODUCTO"
+            android:text="@string/editar_producto_admin"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/colorverde_letra"
@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nombre *"
+            android:text="@string/nombre_producto_edit_admin"
             android:textColor="@color/white" />
 
         <EditText
@@ -39,7 +39,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripción"
+            android:text="@string/descripcion_producto_admin_edit"
             android:textColor="@color/white" />
 
         <EditText
@@ -67,7 +67,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Precio ($) *"
+                    android:text="@string/precio_producto_edit_admin"
                     android:textColor="@color/white" />
 
                 <EditText
@@ -88,7 +88,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Categoría *"
+                    android:text="@string/categoria_producto_edit_admin"
                     android:textColor="@color/white" />
 
                 <Spinner
@@ -104,7 +104,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Imagen del Producto"
+            android:text="@string/imagen_del_producto_edit_admin"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:layout_marginTop="16dp" />
@@ -133,7 +133,7 @@
             android:id="@+id/btnSeleccionarImagen"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="📷  CAMBIAR IMAGEN"
+            android:text="@string/cambiar_imagen_edit_admin"
             android:backgroundTint="#1A1A1A"
             android:textColor="@color/colorverde_letra"
             android:layout_marginBottom="24dp" />
@@ -152,7 +152,7 @@
             android:id="@+id/btnGuardarEdicion"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="GUARDAR CAMBIOS"
+            android:text="@string/guardar_cambios_edit_admin"
             android:textStyle="bold"
             android:backgroundTint="@color/colorverde_letra"
             android:textColor="@color/black"

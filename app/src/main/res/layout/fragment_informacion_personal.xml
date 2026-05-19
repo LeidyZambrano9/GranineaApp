@@ -1,94 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/color_fondo"
+android:gravity="center"
+android:orientation="vertical"
+tools:context="com.app.granineaapp.ui.main.perfil.InformacionPersonalFragment">
+
+<TextView
+    android:id="@+id/Perfil_Titulo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fontFamily="@font/tirodevanagarisanskrititalic"
+    android:text="MI PERFIL"
+    android:gravity="center"
+    android:textColor="@color/colorverde_letra"
+    android:textSize="35sp"
+    android:layout_marginTop="20dp" />
+
+<ScrollView
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_fondo">
+    android:layout_height="0dp"
+    android:layout_weight="1">
 
-    <!-- BOTON CERRAR -->
-    <ImageView
-        android:id="@+id/btn_cerrar"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="15dp"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
-        app:tint="@color/colorverde_letra"
-        android:clickable="true"
-        android:focusable="true" />
-
-    <!-- CONTENIDO -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:padding="20dp">
+        android:gravity="center"
+        android:paddingBottom="30dp">
 
-        <!-- LOGO -->
-        <ImageView
+        <!-- Contenedor de foto (Sin el icono de cámara) -->
+        <FrameLayout
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:src="@drawable/logo_graninea"
-            android:scaleType="fitCenter"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="24dp">
 
-        <!-- TITULO -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/informacion_personal_fragment"
-            android:textColor="#39FF88"
-            android:textSize="22sp"
-            android:textStyle="italic"
-            android:layout_marginBottom="20dp" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="60dp"
+                app:cardElevation="6dp">
 
-        <!-- NOMBRE -->
+                <ImageView
+                    android:id="@+id/iv_perfil_foto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher_round" />
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+
+        <!-- Campos de texto bloqueados -->
         <EditText
-            android:id="@+id/et_nombreIP"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/nombre_y_apellido"
-            android:textColorHint="@color/black"
-            android:background="@drawable/bg_edittext"
-            android:padding="12dp"
-            android:layout_marginBottom="10dp" />
-
-        <!-- EMAIL -->
-        <EditText
-            android:id="@+id/et_emailIP"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/correo_informacion_personal"
-            android:inputType="textEmailAddress"
-            android:textColorHint="@color/black"
-            android:background="@drawable/bg_edittext"
-            android:padding="12dp"
-            android:layout_marginBottom="10dp" />
-
-        <!-- TELEFONO -->
-        <EditText
-            android:id="@+id/et_telefonoIP"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/numero_informacion_personal"
-            android:inputType="phone"
-            android:textColorHint="@color/black"
-            android:background="@drawable/bg_edittext"
-            android:padding="12dp"
-            android:layout_marginBottom="20dp" />
-
-        <!-- BOTON -->
-        <Button
-            android:id="@+id/btn_editarIP"
-            android:layout_width="match_parent"
+            android:id="@+id/et_ver_nombres"
+            android:layout_width="340dp"
             android:layout_height="55dp"
-            android:text="Editar Información"
+            android:background="@drawable/imagen_campo_formulario"
+            android:clickable="false"
+            android:focusable="false"
+            android:gravity="center_vertical|start"
+            android:hint="@string/nombres_informacion_personal"
+            android:inputType="textPersonName"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="@color/colornegro_letra"
+            android:textColorHint="#808080"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/et_ver_apellidos"
+            android:layout_width="340dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/imagen_campo_formulario"
+            android:clickable="false"
+            android:focusable="false"
+            android:gravity="center_vertical|start"
+            android:hint="@string/apellidos_informacion_personal"
+            android:inputType="textPersonName"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="@color/colornegro_letra"
+            android:textColorHint="#808080"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/et_ver_correo"
+            android:layout_width="340dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/imagen_campo_formulario"
+            android:clickable="false"
+            android:focusable="false"
+            android:gravity="center_vertical|start"
+            android:hint="@string/Correo_informacion_personal"
+            android:inputType="textPersonName"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="@color/colornegro_letra"
+            android:textColorHint="#808080"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/et_ver_celular"
+            android:layout_width="340dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/imagen_campo_formulario"
+            android:clickable="false"
+            android:focusable="false"
+            android:gravity="center_vertical|start"
+            android:hint="@string/numero_celular_informacion_personal"
+            android:inputType="textPersonName"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:textColor="@color/colornegro_letra"
+            android:textColorHint="#808080"
+            android:textSize="14sp" />
+
+        <!-- Botón para IR a la pantalla de edición -->
+
+        <Button
+            android:id="@+id/btn_ir_editar_perfil"
+            android:layout_width="340dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="@color/colorverde_letra"
+            android:text="@string/editar_perfil_informacion_personal"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:backgroundTint="@color/colorverde_letra" />
+            app:cornerRadius="12dp" />
 
     </LinearLayout>
-
-</RelativeLayout>
+</ScrollView>
+</LinearLayout>

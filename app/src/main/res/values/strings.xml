@@ -122,4 +122,16 @@
     <string name="nombres">NOMBRES</string>
     <string name="apellidos">APELLIDOS</string>
     <string name="repetir_contrase_a">REPETIR CONTRASEÑA</string>
+    <string name="apellidos_informacion_personal">APELLIDOS</string>
+    <string name="nombres_informacion_personal">NOMBRES</string>
+    <string name="Correo_informacion_personal">CORREO</string>
+    <string name="numero_celular_informacion_personal">NUMERO CELULAR</string>
+    <string name="editar_perfil_informacion_personal">Editar Perfil</string>
+    <string name="cambiar_foto">cambiar_foto</string>
+    <string name="foto_de_perfil">Foto de perfil</string>
+    <string name="editar_perfil">Editar Perfil</string>
+    <string name="guardar_cambios">Guardar Cambios</string>
+    <string name="contrase_a">CONTRASEÑA</string>
+    <string name="repetir_contraseña">REPETIR CONTRASEÑA</string>
+    <string name="contraseña">CONTRASEÑA</string>
 </resources>

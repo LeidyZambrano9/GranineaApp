@@ -18,13 +18,15 @@ import com.app.granineaapp.SupabaseClient
 import com.app.granineaapp.ui.main.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.auth.providers.Google
 import io.github.jan.supabase.auth.providers.builtin.Email
+import io.github.jan.supabase.auth.providers.builtin.IDToken
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
-    // Se declaran los EditText para poder capturar el texto
     private lateinit var etCorreo: EditText
     private lateinit var etContrasena: EditText
 
@@ -32,46 +34,38 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Referencias a los componentes de tu XML
-        etCorreo = findViewById(R.id.inputUser) // ⚠️ Verifica que este ID coincida con tu XML
-        etContrasena = findViewById(R.id.inputPassword) // ⚠️ Verifica que este ID coincida con tu XML
+        // Vinculación exacta con los IDs actuales de tu XML
+        etCorreo = findViewById(R.id.inputUser)
+        etContrasena = findViewById(R.id.inputPassword)
 
         val btnIniciarSesion = findViewById<Button>(R.id.botonIniciarSesionLogin)
         val txtCrearCuenta = findViewById<TextView>(R.id.txtCrearCuenta)
         val btnGoogle = findViewById<Button>(R.id.btnGoogleLogin)
         val btnHuella = findViewById<ImageButton>(R.id.btnHuellaLogin)
 
-        // 1. Login Tradicional COMPLETAMENTE REAL CON SUPABASE
+        // 1. LOGIN TRADICIONAL CON SUPABASE
         btnIniciarSesion?.setOnClickListener {
             val correo = etCorreo.text.toString().trim()
             val clave = etContrasena.text.toString().trim()
 
-            // Validación inicial de campos vacíos
             if (correo.isEmpty() || clave.isEmpty()) {
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Ejecución de la petición en la corrutina
             lifecycleScope.launch {
                 try {
-                    // Intentamos autenticar con Supabase Auth
                     SupabaseClient.client.auth.signInWith(Email) {
                         email = correo
                         password = clave
                     }
-
-                    // Si pasa aquí, las credenciales existen y son correctas
                     runOnUiThread {
                         Toast.makeText(this@LoginActivity, "¡Bienvenido a Graninea!", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(intent)
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     }
-
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    // Si el usuario no existe o la contraseña no coincide, cae al catch
                     runOnUiThread {
                         Toast.makeText(this@LoginActivity, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
                     }
@@ -79,30 +73,36 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // 2. Login con Google (Intacto)
+        // 2. LOGIN CON GOOGLE
         btnGoogle?.setOnClickListener {
             iniciarProcesoGoogle()
         }
 
-        // 3. Login con Huella (Intacto)
+        // 3. LOGIN CON HUELLA
         btnHuella?.setOnClickListener {
             iniciarProcesoBiometrico()
         }
 
-        // 4. Registro (Intacto)
+        // 4. IR AL REGISTRO
         txtCrearCuenta?.setOnClickListener {
             startActivity(Intent(this, RegistroActivity::class.java))
         }
     }
 
     private fun iniciarProcesoGoogle() {
+        // Configuramos las opciones de Google Sign-In pidiendo el ID Token
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("1014864077184-crlgc88na95r1sj0fj0r6k49grsercih.apps.googleusercontent.com") // ⚠️ Recuerda cambiar esto por tu Web Client ID real
             .requestEmail()
             .build()
 
         val googleSignInClient = GoogleSignIn.getClient(this, gso)
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, 100)
+
+        // Forzamos el cierre de sesión previo local para que siempre permita elegir cuenta en caso de error
+        googleSignInClient.signOut().addOnCompleteListener {
+            val signInIntent = googleSignInClient.signInIntent
+            startActivityForResult(signInIntent, 100)
+        }
     }
 
     private fun iniciarProcesoBiometrico() {
@@ -144,13 +144,40 @@ class LoginActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 100) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            if (task.isSuccessful) {
-                val cuenta = task.result
-                Toast.makeText(this, "Bienvenido: ${cuenta?.displayName}", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            } else {
-                Toast.makeText(this, "No se pudo conectar con Google", Toast.LENGTH_SHORT).show()
+            try {
+                // Captura estricta resolviendo excepciones
+                val cuenta = task.getResult(ApiException::class.java)
+                val tokenDeGoogle = cuenta?.idToken
+
+                if (tokenDeGoogle != null) {
+                    // CONEXIÓN INTEGRADA CON SUPABASE AUTH //
+                    lifecycleScope.launch {
+                        try {
+                            // Intercambiamos el token de Google con el sistema de Supabase sin conflictos de variables
+                            SupabaseClient.client.auth.signInWith(IDToken) {
+                                idToken = tokenDeGoogle
+                                provider = Google
+                            }
+
+                            runOnUiThread {
+                                Toast.makeText(this@LoginActivity, "Bienvenido: ${cuenta.displayName}", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                                finish()
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            runOnUiThread {
+                                Toast.makeText(this@LoginActivity, "Supabase rechazó el token de Google: ${e.localizedMessage}", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "Error: El token de Google llegó vacío", Toast.LENGTH_SHORT).show()
+                }
+
+            } catch (e: ApiException) {
+                e.printStackTrace()
+                Toast.makeText(this, "Fallo en Google Sign-In (Código: ${e.statusCode})", Toast.LENGTH_LONG).show()
             }
         }
     }

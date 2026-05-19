@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = findViewById(R.id.drawer_layout)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
         val navView = findViewById<NavigationView>(R.id.nav_view)
-        
+
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.inicio -> cargarFragment(HomeFragment())
                 R.id.catalogoProductos -> cargarFragment(CatalogoFragment())
                 R.id.carritoCompras -> cargarFragment(CarritoFragment())
-                R.id.miPerfil -> cargarFragment(EditarPerfilFragment())
+                R.id.miPerfil -> cargarFragment(PerfilFragment())
                 // ✅ NUEVO: Abrir AdminActivity
                 R.id.nav_admin -> {
                     val intent = Intent(this, AdminActivity::class.java)
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.inicio -> cargarFragment(HomeFragment())
                 R.id.catalogoProductos -> cargarFragment(CatalogoFragment())
                 R.id.carritoCompras -> cargarFragment(CarritoFragment())
-                R.id.miPerfil -> cargarFragment(EditarPerfilFragment())
+                R.id.miPerfil -> cargarFragment(PerfilFragment())
 
             }
             drawerLayout.closeDrawers()

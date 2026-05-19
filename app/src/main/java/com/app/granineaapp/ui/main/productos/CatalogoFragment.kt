@@ -1,117 +1,192 @@
 package com.app.granineaapp.ui.main.productos
 
 import android.os.Bundle
-import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.granineaapp.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.app.granineaapp.data.ProductoRepository
+import com.app.granineaapp.ui.main.carrito.CarritoFragment
+import kotlinx.coroutines.launch
 
+/**
+ * Catálogo de productos para el cliente — carga la lista desde Supabase.
+ * Los filtros y el buscador trabajan sobre la lista ya descargada (sin
+ * consultas adicionales).
+ */
 class CatalogoFragment : Fragment() {
 
-    // Lista mutable para poder agregar productos nuevos en tiempo real
-    private val todosLosProductos = mutableListOf(
-        Producto("El chiki",  5000.0,  R.drawable.atomo_imagen_chiki,    TipoProducto.SIN_LICOR),
-        Producto("El neita",  15000.0, R.drawable.atomo_imagen_chocopa,  TipoProducto.CON_LICOR),
-        Producto("Chocopa",   30000.0, R.drawable.atomo_imagen_chocopa,  TipoProducto.XL),
-        Producto("Litroski",  32000.0, R.drawable.atomo_imagen_litroski, TipoProducto.XL),
-    )
+    // ── Lista maestra descargada de Supabase ──────────────────────────────────
+    private var listaProductos: List<Producto> = emptyList()
 
+    // ── Estado de filtros ─────────────────────────────────────────────────────
+    private var filtroActivo: String = "todos"
+    private var textoBusqueda: String = ""
+
+    // ── Referencias UI ────────────────────────────────────────────────────────
     private lateinit var adapter: ProductoAdapter
-    private var filtroActivo: TipoProducto? = null
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var buscador: EditText
+    private lateinit var progressBar: ProgressBar
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private lateinit var btnSinLicor: TextView
+    private lateinit var btnConLicor: TextView
+    private lateinit var btnXL: TextView
+    private lateinit var btnCarrito: ImageView
 
-        // Escuchar el resultado que envía CrearProductoFragment
-        parentFragmentManager.setFragmentResultListener("nuevo_producto", this) { _, bundle ->
-            val nombre = bundle.getString("nombre") ?: return@setFragmentResultListener
-            val precio = bundle.getDouble("precio")
-            val imagen = bundle.getInt("imagen")
-            val tipoStr = bundle.getString("tipo") ?: TipoProducto.SIN_LICOR.name
-            val tipo   = TipoProducto.valueOf(tipoStr)
-
-            val nuevoProducto = Producto(nombre, precio, imagen, tipo)
-            todosLosProductos.add(nuevoProducto)
-
-            // Refrescar lista respetando el filtro activo
-            aplicarFiltro(null, emptyList())
-        }
-    }
-
+    // ─────────────────────────────────────────────────────────────────────────
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_catalogo, container, false)
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_productos)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        // Referencias
+        recyclerView = view.findViewById(R.id.recycler_productos)
+        buscador     = view.findViewById(R.id.buscador)
+        btnSinLicor  = view.findViewById(R.id.btn_sin_licor)
+        btnConLicor  = view.findViewById(R.id.btn_con_licor)
+        btnXL        = view.findViewById(R.id.btn_xl)
+        btnCarrito   = view.findViewById(R.id.btn_carrito)
+        progressBar  = view.findViewById(R.id.progressBarCatalogo)  // añadir al layout
 
-        adapter = ProductoAdapter(todosLosProductos.toMutableList()) { producto ->
-            val fragment = DetalleProductoFragment()
-            fragment.arguments = Bundle().apply {
-                putString("nombre", producto.nombre)
-                putDouble("precio", producto.precio)
-                putInt("imagen", producto.imagenRes)
-            }
+        btnCarrito.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
+                .replace(R.id.fragment_container, CarritoFragment())
                 .addToBackStack(null)
                 .commit()
         }
+
+        // RecyclerView
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        adapter = ProductoAdapter(emptyList()) { producto -> abrirDetalle(producto) }
         recyclerView.adapter = adapter
 
-        // Filtros
-        val filtroSin = view.findViewById<TextView>(R.id.filtro_sin_licor)
-        val filtroCon = view.findViewById<TextView>(R.id.filtro_con_licor)
-        val filtroXl  = view.findViewById<TextView>(R.id.filtro_xl)
-        val filtros   = listOf(filtroSin, filtroCon, filtroXl)
+        configurarFiltros()
+        configurarBuscador()
 
-        listOf(
-            filtroSin to TipoProducto.SIN_LICOR,
-            filtroCon to TipoProducto.CON_LICOR,
-            filtroXl  to TipoProducto.XL
-        ).forEach { (tv, tipo) ->
-            tv.setOnClickListener {
-                filtroActivo = if (filtroActivo == tipo) null else tipo
-                aplicarFiltro(if (filtroActivo == tipo) tv else null, filtros)
-            }
-        }
-
-        // FAB o botón para ir a CrearProductoFragment
-        // Asegúrate de tener un fab_agregar en fragment_catalogo.xml,
-        // o cambia esto por el id de tu botón "+" existente.
-        view.findViewById<FloatingActionButton>(R.id.fab_agregar)?.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, CrearProductoFragment())
-                .addToBackStack(null)
-                .commit()
-        }
+        // Cargar desde Supabase
+        cargarProductos()
 
         return view
     }
 
-    private fun aplicarFiltro(seleccionado: TextView?, todos: List<TextView>) {
-        todos.forEach { tv ->
-            val activo = tv == seleccionado
-            tv.setBackgroundResource(
+    // ── Recargar cuando el fragment vuelve a ser visible ──────────────────────
+    override fun onResume() {
+        super.onResume()
+        cargarProductos()
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    //  CARGA DESDE SUPABASE
+    // ─────────────────────────────────────────────────────────────────────────
+    private fun cargarProductos() {
+        progressBar.visibility = View.VISIBLE
+        lifecycleScope.launch {
+            try {
+                listaProductos = ProductoRepository.obtenerProductos()
+                aplicarFiltros()
+            } catch (e: Exception) {
+                Toast.makeText(
+                    requireContext(),
+                    "Error al cargar el catálogo: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            } finally {
+                progressBar.visibility = View.GONE
+            }
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    //  FILTROS
+    // ─────────────────────────────────────────────────────────────────────────
+    private fun configurarFiltros() {
+        val botones = listOf(btnSinLicor, btnConLicor, btnXL)
+        val tipos   = listOf("sin licor", "con licor", "xl")
+
+        botones.forEachIndexed { index, boton ->
+            boton.setOnClickListener {
+                val tipo = tipos[index]
+                filtroActivo = if (filtroActivo == tipo) "todos" else tipo
+                actualizarEstiloFiltros()
+                aplicarFiltros()
+            }
+        }
+    }
+
+    private fun actualizarEstiloFiltros() {
+        val botones = listOf(btnSinLicor, btnConLicor, btnXL)
+        val tipos   = listOf("sin licor", "con licor", "xl")
+
+        botones.forEachIndexed { index, boton ->
+            val activo = filtroActivo == tipos[index]
+            boton.setBackgroundResource(
                 if (activo) R.drawable.bg_filtro_activo else R.drawable.bg_filtro_inactivo
             )
-            tv.setTextColor(
+            boton.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
-                    if (activo) android.R.color.white else R.color.color_verde_oscuro
+                    if (activo) R.color.black else R.color.white
                 )
             )
         }
-        val lista = if (filtroActivo == null) todosLosProductos
-        else todosLosProductos.filter { it.tipo == filtroActivo }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    //  BUSCADOR
+    // ─────────────────────────────────────────────────────────────────────────
+    private fun configurarBuscador() {
+        buscador.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable?) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                textoBusqueda = s?.toString()?.trim() ?: ""
+                aplicarFiltros()
+            }
+        })
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    //  FILTRO + BÚSQUEDA COMBINADOS (opera sobre la lista en memoria)
+    // ─────────────────────────────────────────────────────────────────────────
+    private fun aplicarFiltros() {
+        val lista = listaProductos.filter { producto ->
+            val coincideTipo   = filtroActivo == "todos" || producto.tipo == filtroActivo
+            val coincideTexto  = textoBusqueda.isEmpty() ||
+                    producto.nombre.contains(textoBusqueda, ignoreCase = true)
+            coincideTipo && coincideTexto
+        }
         adapter.actualizarLista(lista)
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    //  DETALLE
+    // ─────────────────────────────────────────────────────────────────────────
+    private fun abrirDetalle(producto: Producto) {
+        val fragment = DetalleProductoFragment()
+        fragment.arguments = Bundle().apply {
+            putString("nombre",      producto.nombre)
+            putDouble("precio",      producto.precio)
+            putString("imagen_url",  producto.imagenUrl)
+            putString("descripcion", producto.descripcion)
+            putString("sabores",     producto.sabores)
+        }
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

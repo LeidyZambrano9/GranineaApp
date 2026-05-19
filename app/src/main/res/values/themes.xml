@@ -1,14 +1,21 @@
+
+    <!-- En res/values/themes.xml -->
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.GranineaApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="android:statusBarColor">@color/black</item>
+<!-- Base application theme. -->
+<style name="Base.Theme.GranineaApp" parent="Theme.Material3.DayNight.NoActionBar">
+    <!-- Esto quita el morado de botones y otros elementos -->
+    <item name="colorPrimary">@color/black</item>
+    <item name="android:statusBarColor">@color/black</item>
+    <!-- Iconos de la barra en blanco (ya que el fondo es negro) -->
+    <item name="android:windowLightStatusBar">false</item>
+</style>
 
-    </style>
+<style name="Theme.GranineaApp" parent="Base.Theme.GranineaApp" />
 
-    <style name="Theme.GranineaApp" parent="Base.Theme.GranineaApp" />
-    <style name="Theme.App.Splash" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowBackground">@android:color/black</item>
-    </style>
+<!-- Este es el que usa tu MainActivity -->
+<style name="Theme.App.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+    <item name="android:windowBackground">@android:color/black</item>
+    <item name="android:statusBarColor">@color/black</item>
+    <item name="colorPrimary">@color/black</item>
+</style>
 </resources>

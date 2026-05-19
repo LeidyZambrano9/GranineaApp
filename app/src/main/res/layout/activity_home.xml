@@ -26,6 +26,7 @@
         android:layout_width="337dp"
         android:layout_height="140dp"
         android:gravity="center_horizontal"
+        android:fontFamily="@font/tirodevanagarisanskrititalic"
         android:text="@string/bienvenida_home"
         android:textColor="@color/white"
         android:textSize="22sp" />

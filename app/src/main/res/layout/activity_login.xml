@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_fondo"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="24dp"
-    tools:context=".ui.auth.LoginActivity">
-
-    <ImageView
-        android:id="@+id/logo_login"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/logo_graninea" />
-
-    <TextView
-        android:id="@+id/texto_iniciar_sesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/island_moments"
-        android:text="@string/iniciar_sesion_login"
-        android:textColor="@color/colorverde_letra"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="20dp" />
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="24dp"
+        tools:context=".ui.auth.LoginActivity">
 
+        <ImageView
+            android:id="@+id/logo_login"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/logo_graninea" />
+
+        <TextView
+            android:id="@+id/texto_iniciar_sesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/island_moments"
+            android:text="@string/iniciar_sesion_login"
+            android:textColor="@color/colorverde_letra"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Campos de Texto -->
         <EditText
             android:id="@+id/inputUser"
             android:layout_width="340dp"
@@ -43,7 +43,6 @@
             android:inputType="textEmailAddress"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:gravity="center_vertical|start"
             android:textColor="@color/colornegro_letra"
             android:textColorHint="#808080"
             android:textSize="14sp" />
@@ -58,57 +57,83 @@
             android:inputType="textPassword"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:gravity="center_vertical|start"
             android:textColor="@color/colornegro_letra"
             android:textColorHint="#808080"
             android:textSize="14sp" />
 
-    </LinearLayout>
+        <!-- Botón de Login Tradicional -->
+        <Button
+            android:id="@+id/botonIniciarSesionLogin"
+            android:layout_width="340dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="@color/colorverde_letra"
+            android:text="@string/boton_iniciar_sesion"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:cornerRadius="12dp" />
 
-    <Button
-        android:id="@+id/botonIniciarSesionLogin"
-        android:layout_width="340dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="25dp"
-        android:backgroundTint="@color/colorverde_letra"
-        android:text="@string/boton_iniciar_sesion"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:cornerRadius="12dp" />
+        <!-- BOTÓN GOOGLE (Ahora es un Button real para evitar el crash) -->
+        <Button
+            android:id="@+id/btnGoogleLogin"
+            android:layout_width="340dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@android:color/white"
+            app:icon="@drawable/imagen_google"
+            app:iconTint="@null"
+            app:iconGravity="textStart"
+            app:iconPadding="10dp"
+            android:text="Continuar con Google"
+            android:textAllCaps="false"
+            android:textColor="#757575"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="12dp"
+            app:strokeColor="#DDDDDD"
+            app:strokeWidth="1dp" />
 
-    <TextView
-        android:id="@+id/txtRestablecer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/restablecer_contra_login"
-        android:textColor="#0066CC"
-        android:textSize="14sp" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        <!-- BOTÓN HUELLA -->
+        <ImageButton
+            android:id="@+id/btnHuellaLogin"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_huella"
+            app:tint="@color/colorverde_letra" />
 
         <TextView
+            android:id="@+id/txtRestablecer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_tienes_cuenta"
-            android:textColor="@android:color/white"
+            android:layout_marginTop="15dp"
+            android:text="@string/restablecer_contra_login"
+            android:textColor="#0066CC"
             android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/txtCrearCuenta"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/crear_cuenta"
-            android:textColor="#0066CC"
-            android:textSize="14sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_tienes_cuenta"
+                android:textColor="@android:color/white" />
+            <TextView
+                android:id="@+id/txtCrearCuenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/crear_cuenta"
+                android:textColor="#0066CC"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
